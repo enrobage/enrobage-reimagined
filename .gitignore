@@ -27,3 +27,6 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Local design notes
+DESIGN_CHECKLIST.md

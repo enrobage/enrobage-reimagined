@@ -23,9 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-  # Secrets / env
-  .env
-  .env.*
-  !.env.example
-
-  DESIGN_CHECKLIST.md
+# Secrets / env
+.env
+.env.*
+!.env.example

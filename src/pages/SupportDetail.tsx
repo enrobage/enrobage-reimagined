@@ -30,7 +30,7 @@ const SupportDetail = () => {
         {/* ============ HERO ============ */}
         <section className="relative pt-24 bg-white overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1 gradient-line-logo z-20" />
-          <div className="mx-auto max-w-[1400px] py-10 lg:py-16 px-6 md:px-[4.2%]">
+          <div className="container-x py-10 lg:py-16">
             <div>
               <div className="inline-flex items-center gap-3 mb-5">
                 <span className="h-px w-10 bg-primary/40" />
@@ -64,7 +64,7 @@ const SupportDetail = () => {
 
         {/* ============ CONTENT ============ */}
         <section className="bg-white py-14 md:py-20">
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
             <div className="space-y-5 mb-12">
               {service.intro.map((p, i) => (
                 <p
@@ -150,7 +150,7 @@ const SupportDetail = () => {
 
         {/* ============ CTA ============ */}
         <section className="relative bg-white pb-20 md:pb-28">
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
             <div
               className="relative w-full overflow-hidden rounded-3xl shadow-xl"
               style={{ background: PETAL_GRADIENT }}

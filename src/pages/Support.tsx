@@ -27,7 +27,7 @@ const Support = () => {
         {/* ============ HERO ============ */}
         <section className="relative pt-24 mesh-bg overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1 gradient-line-logo z-20" />
-          <div className="mx-auto max-w-[1400px] py-12 lg:py-24 px-6 md:px-[4.2%] flex flex-col items-center text-center min-h-[300px] md:min-h-[420px] justify-center">
+          <div className="container-x py-12 lg:py-24 flex flex-col items-center text-center min-h-[300px] md:min-h-[420px] justify-center">
             <div className="inline-flex items-center gap-3 mb-5 animate-slide-up">
               <span className="h-px w-10 bg-primary/40" />
               <span className="text-xs text-primary tracking-[0.2em] uppercase font-semibold">Technical Services</span>
@@ -58,7 +58,7 @@ const Support = () => {
 
         {/* ============ SERVICES ============ */}
         <section className="bg-white py-20 md:py-28" ref={ref}>
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
 
 
             <div className="w-full mb-16">
@@ -74,7 +74,7 @@ const Support = () => {
 
 
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
               {services.map((s) => (
                 <Link
                   key={s.title}
@@ -107,7 +107,7 @@ const Support = () => {
 
         {/* ============ CTA ============ */}
         <section className="relative bg-white pb-20 md:pb-28">
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
             <div
               className="relative w-full overflow-hidden rounded-3xl shadow-xl"
               style={{ background: PETAL_GRADIENT }}

@@ -114,7 +114,7 @@ const InteractiveJourney = () => {
         aria-hidden="true"
       />
 
-      <ol className="relative space-y-10 md:space-y-16 py-4">
+      <ol className="relative space-y-8 md:space-y-10 py-4">
         {timeline.map((t, i) => {
           const isActive = i === active;
           const isPast = i < active;
@@ -259,8 +259,8 @@ const About = () => {
         {/* ============ HERO (unchanged) ============ */}
         <section className="relative pt-24 mesh-bg overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1 gradient-line-logo z-20" />
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch min-h-0 lg:min-h-[720px]">
-            <div className="lg:col-span-6 text-left py-10 lg:py-20 px-6 md:px-[4.2%] flex flex-col justify-center">
+          <div className="container-x relative z-10">
+            <div className="lg:w-1/2 text-left py-10 lg:py-20 flex flex-col justify-center lg:min-h-[720px]">
               <div className="inline-flex items-center gap-3 mb-5 animate-slide-up">
                 <span className="h-px w-10 bg-primary/40" />
                 <span className="text-xs text-primary tracking-[0.2em] uppercase font-semibold">About Enrobage India</span>
@@ -285,13 +285,14 @@ const About = () => {
                 </Link>
               </div>
             </div>
-            <div className="lg:col-span-6 relative h-[260px] sm:h-[360px] lg:h-auto overflow-hidden animate-slide-up" style={{ animationDelay: "0.2s" }}>
-              <img
-                src={aboutTabletsHand}
-                alt="Hand holding colorful coated tablets — Bagecoat palette"
-                className="absolute inset-0 w-full h-full object-cover object-center scale-[1.35] lg:scale-[1.5] origin-center"
-              />
-            </div>
+          </div>
+          {/* Hand image: stacks on mobile, bleeds to the right viewport edge on desktop */}
+          <div className="relative h-[260px] sm:h-[360px] lg:absolute lg:top-0 lg:right-0 lg:h-full lg:w-1/2 overflow-hidden animate-slide-up" style={{ animationDelay: "0.2s" }}>
+            <img
+              src={aboutTabletsHand}
+              alt="Hand holding colorful coated tablets — Bagecoat palette"
+              className="absolute inset-0 w-full h-full object-cover object-center scale-[1.35] lg:scale-[1.5] origin-center"
+            />
           </div>
           <div className="absolute bottom-0 left-0 right-0 z-20" style={{ height: "0.5pt", backgroundColor: "#9ca3af" }} />
         </section>
@@ -299,7 +300,7 @@ const About = () => {
 
         {/* ============ LEGACY — centered heading with hex icon + rules ============ */}
         <section className="bg-white py-20 md:py-28">
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
             <div className="flex items-center justify-center gap-6 mb-10">
               <span className="h-px flex-1 max-w-[220px]" style={{ background: PETAL.blue, opacity: 0.55 }} />
               <div
@@ -336,7 +337,7 @@ const About = () => {
 
         {/* ============ MISSION & VISION — split image + colored block ============ */}
         <section className="bg-white pb-20 md:pb-28">
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
             <div className="grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden shadow-xl">
               <div className="relative bg-logo-navy flex items-center justify-center min-h-[380px] lg:min-h-[520px]">
                 <video
@@ -389,7 +390,7 @@ const About = () => {
 
         {/* ============ OUR VALUES — hexagon icons grid ============ */}
         <section className="bg-white pb-20 md:pb-28">
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
             <div className="max-w-3xl mx-auto mb-14 text-center">
               <AnimatedHeading direction="left">
                 <h2 className="heading-section tracking-tight text-logo-navy mb-5 leading-tight">
@@ -435,8 +436,9 @@ const About = () => {
 
         {/* ============ GLOBAL LOCATIONS — blue band ============ */}
         <section className="relative bg-white py-16 md:py-20">
+          <div className="container-x">
           <div
-            className="relative mx-auto max-w-[1400px] rounded-3xl"
+            className="relative w-full rounded-3xl"
             style={{
               background: `linear-gradient(115deg, ${PETAL.navy} 0%, ${PETAL.blue} 55%, ${PETAL.cyan} 100%)`,
             }}
@@ -479,11 +481,12 @@ const About = () => {
               </div>
             </div>
           </div>
+          </div>
         </section>
 
         {/* ============ OUR JOURNEY — horizontal timeline ============ */}
         <section className="bg-white py-20 md:py-28 overflow-hidden">
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
             <div className="max-w-3xl mx-auto mb-16 text-center">
               <AnimatedHeading direction="left">
                 <h2 className="heading-section tracking-tight text-logo-navy mb-5 leading-tight">
@@ -503,7 +506,7 @@ const About = () => {
 
         {/* ============ CTA — contained ombre box (matches Home) ============ */}
         <section className="relative bg-white pb-20 md:pb-28">
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
             <div
               className="relative w-full overflow-hidden rounded-3xl shadow-xl"
               style={{

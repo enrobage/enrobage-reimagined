@@ -294,7 +294,7 @@ const Products = () => {
         {/* HERO — Bagecoat logo + range messaging */}
         <section className="relative pt-24 mesh-bg-no-purple overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1 gradient-line-logo z-20" />
-          <div className="w-full flex flex-col items-center justify-center min-h-0 md:min-h-[50vh] px-6 md:px-[4.2%] py-10 lg:py-16 text-center">
+          <div className="container-x flex flex-col items-center justify-center min-h-0 md:min-h-[50vh] py-10 lg:py-16 text-center">
             <div className="inline-flex items-center gap-3 mb-5 animate-slide-up" style={{ animationDelay: "0.1s" }}>
               <span className="h-px w-10 bg-primary/40" />
               <span className="text-xs text-primary tracking-[0.2em] uppercase font-semibold">Our Product Range</span>
@@ -315,8 +315,8 @@ const Products = () => {
         <div className="rainbow-strip" aria-hidden="true" />
 
         {/* ============ OUR COATING SYSTEMS — tabs + intro box + carousel ============ */}
-        <section id="coating-systems" className="bg-white pt-20 md:pt-28 pb-20 md:pb-28 px-6 md:px-[4.2%]">
-          <div className="mx-auto w-full">
+        <section id="coating-systems" className="bg-white pt-20 md:pt-28 pb-20 md:pb-28">
+          <div className="container-x">
             {/* Tabs — coatings appear directly after the heading */}
             <div
               ref={ref}
@@ -429,7 +429,7 @@ const Products = () => {
 
         {/* ============ CTA — contained ombre box (matches Home) ============ */}
         <section className="relative bg-white pb-20 md:pb-28">
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
             <div
               className="relative w-full overflow-hidden rounded-3xl shadow-xl"
               style={{

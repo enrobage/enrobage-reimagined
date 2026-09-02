@@ -59,8 +59,8 @@ const Contact = () => {
         {/* HERO — Colorcon-style curved blue */}
         <section className="relative pt-24 pb-16 lg:pt-28 lg:pb-20 mesh-bg overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1 gradient-line-logo" />
-          <div className="w-full px-6 md:px-[4.2%] relative z-10">
-            <div className="max-w-5xl mx-auto text-center">
+          <div className="container-x relative z-10">
+            <div className="text-center">
               <div className="inline-flex items-center gap-3 mb-5 animate-slide-up">
                 <span className="h-px w-10 bg-primary/40" />
                 <span className="text-xs text-primary tracking-[0.2em] uppercase font-semibold">Get in Touch</span>
@@ -80,7 +80,7 @@ const Contact = () => {
 
         {/* MAIN CONTENT */}
         <section>
-          <div className="section-card">
+          <div className="container-x py-16 md:py-20 lg:py-24">
             <div className="grid lg:grid-cols-12 gap-14">
               {/* LEFT — FORM */}
               <div className="lg:col-span-7">

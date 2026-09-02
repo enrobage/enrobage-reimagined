@@ -17,7 +17,7 @@
     --secondary: 220 20% 95%;
     --secondary-foreground: 220 40% 13%;
     --muted: 220 15% 94%;
-    --muted-foreground: 220 10% 46%;
+    --muted-foreground: 220 16% 38%;
     --accent: 220 70% 30%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
@@ -146,23 +146,33 @@
   width: 100%;
 }
 
-/* Let text/content blocks expand edge-to-edge inside our sections.
-   The 10% side padding on .section-card / .section-full provides the only gutters. */
-.section-card .max-w-xl,
-.section-card .max-w-2xl,
-.section-card .max-w-3xl,
-.section-card .max-w-4xl,
-.section-card .max-w-5xl,
-.section-card .max-w-6xl,
-.section-card .max-w-7xl,
-.section-full .max-w-xl,
-.section-full .max-w-2xl,
-.section-full .max-w-3xl,
-.section-full .max-w-4xl,
-.section-full .max-w-5xl,
-.section-full .max-w-6xl,
-.section-full .max-w-7xl {
-  max-width: 100% !important;
+/* ============================================================
+   CONTAINERIZATION — one centered container sitewide.
+   .container-x  = standard page content (max 1280px, centered)
+   .container-prose = long-form reading measure (~70ch)
+   Full-bleed sections achieve edge-to-edge by simply NOT using
+   these; their inner content still wraps in .container-x so it
+   left-aligns with the rest of the page.
+   ============================================================ */
+.container-x {
+  width: 100%;
+  max-width: 96rem; /* 1536px */
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+.container-prose {
+  width: 100%;
+  max-width: 44rem; /* ~704px, ~70ch reading measure */
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px) {
+  .container-x,
+  .container-prose { padding-inline: 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .container-x,
+  .container-prose { padding-inline: 2rem; }
 }
 
 /* Colorful accent strip under section headings — petal palette */

@@ -113,7 +113,7 @@ const Index = () => {
       <section className="relative flex items-center overflow-hidden mesh-bg">
         <div className="absolute top-0 left-0 right-0 h-1 gradient-line-logo" />
 
-        <div className="w-full px-6 md:px-[4.2%] pt-24 pb-12 lg:pt-28 lg:pb-20">
+        <div className="container-x pt-24 pb-12 lg:pt-28 lg:pb-20">
           <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10 relative">
             <div className="w-full lg:w-[62%] min-w-0 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-secondary mb-5 animate-slide-up">
@@ -151,7 +151,16 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="w-full lg:w-[46%] min-w-0 max-w-lg lg:max-w-none mt-4 lg:mt-0 flex items-center justify-center">
+            <div className="relative w-full lg:w-[46%] min-w-0 max-w-lg lg:max-w-none mt-4 lg:mt-0 flex items-center justify-center">
+              {/* Soft brand glow so the pale 3D tablet reads against the white hero */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -z-10"
+                style={{
+                  background:
+                    "radial-gradient(circle at 50% 45%, hsl(var(--logo-blue) / 0.16) 0%, hsl(var(--logo-purple) / 0.08) 40%, transparent 70%)",
+                }}
+              />
               <Suspense fallback={<div className="w-full aspect-square max-h-[360px] flex items-center justify-center"><div className="w-16 h-16 rounded-full border-2 border-primary/20 border-t-primary animate-spin" /></div>}>
                 <SplineTablet />
               </Suspense>
@@ -169,9 +178,9 @@ const Index = () => {
 
       {/* ============ STATS — Trusted & Proven (reference layout) ============ */}
       <section className="bg-white pt-20 md:pt-28 pb-10 md:pb-14">
-        <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+        <div className="container-x">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-10 md:gap-0">
-            <div className="md:w-1/3 md:pr-12">
+            <div className="md:w-2/5 md:pr-12">
               <AnimatedHeading direction="left">
                 <h2 className="heading-section text-logo-navy mb-4 tracking-tight leading-tight">
                   Trusted &amp; Proven
@@ -206,14 +215,14 @@ const Index = () => {
       {/* ============ ABOUT BAGECOAT — full-width split panel (grey band) ============ */}
       <section className="bg-white pt-10 md:pt-12 pb-20 md:pb-28">
         {/* gradient border wrapper around the split panel */}
-        <div className="w-full overflow-hidden">
+        <div className="container-x overflow-hidden">
           <div
             className="gradient-hover-border relative p-[1px] rounded-2xl overflow-hidden shadow-xl"
             style={{ background: PETAL_GRADIENT }}
           >
             <div className="bg-white rounded-[15px] overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="relative bg-white flex items-center justify-center min-h-[380px] lg:min-h-[520px] overflow-hidden">
+                <div className="relative bg-white flex items-center justify-center min-h-[340px] lg:min-h-[460px] overflow-hidden">
                   <img
                     src={bagecoatLogoTablets}
                     alt="Bagecoat™ logo with colorful coated tablets"
@@ -253,14 +262,14 @@ const Index = () => {
 
       {/* ============ COMMITMENT — 4 placards sharing a flowing gradient ============ */}
       <section ref={commitRef} className="bg-white pb-20 md:pb-28 pt-10 md:pt-14">
-        <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+        <div className="container-x">
           <SectionHeader
             title="A Commitment to Your Success"
             desc="Your success drives us. From formulation to dispatch, we deliver pharmaceutical excellence and innovation at every step."
             titleClassName="whitespace-nowrap"
           />
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 items-stretch">
             {commitmentPoints.map((point, i) => (
               <div
                 key={point.title}
@@ -269,10 +278,9 @@ const Index = () => {
                   background: point.gradient,
                   transitionDelay: `${i * 120}ms`,
                   boxShadow: "0 10px 30px hsl(220 40% 13% / 0.14)",
-                  minHeight: "460px",
                 }}
               >
-                <h3 className="font-display font-bold tracking-tight text-[1.4rem] md:text-[1.7rem] leading-[1.15] mb-5 text-white h-28 md:h-32 lg:h-36 flex items-start drop-shadow-[0_1px_10px_rgba(0,0,0,0.25)]">
+                <h3 className="font-display font-bold tracking-tight text-[1.4rem] md:text-[1.7rem] leading-[1.15] mb-5 text-white min-h-[3.5rem] flex items-start drop-shadow-[0_1px_10px_rgba(0,0,0,0.25)]">
                   {point.title}
                 </h3>
                 <span className="block h-px w-10 bg-white/70 mb-5" />
@@ -325,8 +333,8 @@ const Index = () => {
                 {/* Ambient glow */}
                 <div
                   aria-hidden="true"
-                  className="absolute -inset-6 rounded-[2rem] blur-3xl opacity-25 pointer-events-none"
-                  style={{ background: "linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #f1f5f9 100%)" }}
+                  className="absolute -inset-6 rounded-[2rem] blur-3xl opacity-40 pointer-events-none"
+                  style={{ background: "linear-gradient(135deg, hsl(var(--logo-cyan) / 0.5) 0%, hsl(var(--logo-blue) / 0.45) 50%, hsl(var(--logo-purple) / 0.4) 100%)" }}
                 />
                 <div
                   className="relative rounded-[1.5rem] overflow-hidden transition-transform duration-500 hover:-translate-y-1 bg-black"
@@ -361,7 +369,7 @@ const Index = () => {
 
       {/* ============ CTA — contained ombre box ============ */}
       <section className="relative bg-white pb-20 md:pb-28">
-        <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+        <div className="container-x">
           <div
             className="relative w-full overflow-hidden rounded-3xl shadow-xl"
             style={{

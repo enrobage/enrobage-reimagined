@@ -18,7 +18,7 @@ const CAPABILITIES = [
 export const CapabilitiesStrip = () => {
   return (
     <section className="bg-white pb-16 md:pb-20">
-      <div className="mx-auto max-w-[1400px] px-[4.2%]">
+      <div className="container-x">
         <div className="flex items-center gap-4 mb-6">
           <span className="h-px flex-1 bg-border/70" />
           <span className="text-[10px] tracking-[0.32em] uppercase font-semibold text-muted-foreground shrink-0">

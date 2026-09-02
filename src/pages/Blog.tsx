@@ -73,9 +73,9 @@ const Blog = () => {
       <Navbar />
       <div className="page-enter">
         {/* ============ HERO ============ */}
-        <section className="relative px-6 md:px-[4.2%] pt-24 pb-12 lg:pt-28 lg:pb-20 bg-white overflow-hidden">
+        <section className="relative pt-24 pb-12 lg:pt-28 lg:pb-20 bg-white overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1 gradient-line-logo z-20" />
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch min-h-0 lg:min-h-[640px]">
+          <div className="container-x grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch min-h-0 lg:min-h-[640px]">
             <div className="lg:col-span-6 text-left py-0 lg:py-0 flex flex-col justify-center relative z-30">
               <div className="inline-flex items-center gap-3 mb-5 animate-slide-up">
                 <span className="h-px w-10 bg-primary/40" />
@@ -105,7 +105,7 @@ const Blog = () => {
 
         {/* ============ POSTS ============ */}
         <section className="bg-white py-20 md:py-28">
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <AnimatedHeading direction="left">
                 <h2 className="heading-section tracking-tight text-logo-navy mb-5 leading-tight">
@@ -145,7 +145,7 @@ const Blog = () => {
 
         {/* ============ CTA ============ */}
         <section className="relative bg-white pb-20 md:pb-28">
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
             <div className="relative w-full overflow-hidden rounded-3xl shadow-xl" style={{ background: PETAL_GRADIENT }}>
               <div
                 className="pointer-events-none absolute inset-0"

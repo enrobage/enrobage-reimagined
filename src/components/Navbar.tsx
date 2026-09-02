@@ -127,7 +127,7 @@ export const Navbar = () => {
         scrolled ? "py-0.5 shadow-sm border-b border-border" : "py-1"
       }`}
     >
-      <div className="w-full pl-2 pr-4 sm:pl-3 sm:pr-6 lg:pl-4 lg:pr-8 flex items-center justify-between">
+      <div className="container-x flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <img src={logo} alt="Enrobage India" className="h-[57px] sm:h-[68px] md:h-[78px] lg:h-[94px] w-auto" />
         </Link>
@@ -194,7 +194,7 @@ export const Navbar = () => {
           megaOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none"
         }`}
       >
-        <div className="container mx-auto px-6">
+        <div className="container-x">
           <div className="overflow-hidden rounded-b-3xl shadow-2xl border border-border bg-background">
             <div className="grid grid-cols-[260px_1fr]">
               {/* Left rail */}

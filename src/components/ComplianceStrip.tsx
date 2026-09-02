@@ -22,7 +22,7 @@ export const ComplianceStrip = () => {
       aria-label="Regulatory standards and certifications"
       className="bg-white border-y border-border/60"
     >
-      <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%] py-10 md:py-12">
+      <div className="container-x py-10 md:py-12">
         <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10">
           {/* Left eyebrow */}
           <div className="flex items-center gap-3 lg:min-w-[260px]">

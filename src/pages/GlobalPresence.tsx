@@ -87,7 +87,7 @@ const GlobalPresence = () => {
         {/* HERO — mesh-bg like home page */}
         <section className="relative mesh-bg overflow-hidden pt-24">
           <div className="absolute top-0 left-0 right-0 h-1 gradient-line-logo" />
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%] py-12 lg:py-20 flex flex-col items-center text-center min-h-[300px] md:min-h-[360px] justify-center">
+          <div className="container-x py-12 lg:py-20 flex flex-col items-center text-center min-h-[300px] md:min-h-[360px] justify-center">
             <span className="eyebrow mb-4">Worldwide footprint</span>
             <h1 className="heading-hero mb-4">
               Our <span className="gradient-text-logo">Global Presence</span>
@@ -102,12 +102,12 @@ const GlobalPresence = () => {
 
         {/* BODY — white like home page */}
         <section className="bg-white pb-20 md:pb-28 pt-10 md:pt-14">
-          <div className="mx-auto max-w-[1400px] px-6 md:px-[4.2%]">
+          <div className="container-x">
 
 
 
             {/* Globe + countries side by side */}
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start mb-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start mb-10">
               <div
                 ref={containerRef}
                 className="rounded-3xl overflow-hidden relative bg-gradient-to-b from-secondary/30 to-secondary/10 border border-border/40 flex items-center justify-center"
@@ -158,7 +158,7 @@ const GlobalPresence = () => {
                       className={`px-4 py-3 rounded-full border text-sm text-center transition-all ${
                         selected === c.name
                           ? "bg-logo-blue text-white border-logo-blue"
-                          : "bg-secondary/40 border-border/60 text-foreground/80 hover:border-logo-blue/40 hover:bg-white hover:text-logo-navy"
+                          : "bg-secondary border-border text-foreground hover:border-logo-blue/50 hover:bg-white hover:text-logo-navy"
                       }`}
                     >
                       {c.name}

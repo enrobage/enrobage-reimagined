@@ -39,7 +39,7 @@ export const Footer = () => {
     <footer className="relative bg-white text-foreground border-t border-border">
       <div className="rainbow-strip" aria-hidden="true" />
 
-      <div className="w-full px-6 md:px-[4.2%] pt-14 pb-10">
+      <div className="container-x pt-14 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-10">
           {/* Left — logo + blurb */}
           <div className="lg:col-span-5">

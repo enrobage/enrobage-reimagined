@@ -835,7 +835,7 @@ const BlogPost = () => {
 
         {/* ARTICLE */}
         <article className="bg-white py-14 md:py-20">
-          <div className="mx-auto max-w-[900px] px-6 md:px-[4.2%]">
+          <div className="container-prose">
             <div className="h-1.5 w-16 rounded-full mb-10" style={{ backgroundImage: PETAL_GRADIENT }} />
 
             {post.blocks.map((block, i) => {

@@ -59,7 +59,7 @@ const Support = () => {
         {/* ============ SERVICES ============ */}
         <section className="bg-white py-20 md:py-28" ref={ref}>
           <div className="container-x">
-
+            <h2 className="sr-only">Our technical services</h2>
 
             <div className="w-full mb-16">
               <p className="text-base md:text-lg text-foreground/80 leading-relaxed text-justify">

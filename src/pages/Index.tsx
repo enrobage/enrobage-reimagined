@@ -238,7 +238,7 @@ const Index = () => {
                   <h3 className="heading-section mb-5 tracking-tight leading-tight">
                     The Bagecoat™ range by Enrobage
                   </h3>
-                  <p className="text-white/90 text-base md:text-lg leading-relaxed mb-8 max-w-lg font-light">
+                  <p className="text-white/90 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
                     At Enrobage India, we offer a comprehensive range of film coating systems under
                     our brand Bagecoat™, catering to both normal and functional coating needs. Our
                     portfolio spans aqueous, organic, and hydroalcoholic solvent systems — supported
@@ -316,7 +316,7 @@ const Index = () => {
                   From formulation to finished coat
                 </h2>
               </AnimatedHeading>
-              <p className="text-base md:text-lg text-logo-navy/80 leading-relaxed mb-8 max-w-lg font-light">
+              <p className="text-base md:text-lg text-logo-navy/80 leading-relaxed mb-8 max-w-lg">
                 A look at the precision, partnership and people behind every Bagecoat product.
               </p>
               <Link

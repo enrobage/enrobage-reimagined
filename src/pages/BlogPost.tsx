@@ -817,7 +817,7 @@ const BlogPost = () => {
         {/* HERO */}
         <section className="relative pt-24 mesh-bg overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1 gradient-line-logo z-20" />
-          <div className="w-full py-14 lg:py-20 px-6 md:px-[4.2%] flex flex-col items-center text-center justify-center">
+          <div className="container-x py-14 lg:py-20 flex flex-col items-center text-center justify-center">
             <span className="text-[11px] uppercase tracking-[0.25em] font-semibold text-logo-blue mb-4">
               {post.category}
             </span>

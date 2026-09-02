@@ -27,3 +27,5 @@ dist-ssr
   .env
   .env.*
   !.env.example
+
+  DESIGN_CHECKLIST.md

@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
-import { Mail, Phone, Send, Linkedin } from "lucide-react";
+import { Mail, Phone, Send, Linkedin, MapPin } from "lucide-react";
 import { useState } from "react";
 import contactHero from "@/assets/contact-hero.jpg";
 import { Link } from "react-router-dom";
@@ -37,10 +37,6 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formState.interest) {
-      alert("Please pick what you're interested in.");
-      return;
-    }
     setSubmitted(true);
     setTimeout(() => {
       const subject =
@@ -81,12 +77,89 @@ const Contact = () => {
         {/* MAIN CONTENT */}
         <section>
           <div className="container-x py-16 md:py-20 lg:py-24">
-            <div className="grid lg:grid-cols-12 gap-14">
-              {/* LEFT — FORM */}
-              <div className="lg:col-span-7">
+            <div className="rounded-3xl card-elevated overflow-hidden grid lg:grid-cols-5">
+              {/* LEFT — INFO PANEL (brand ombre) */}
+              <aside className="lg:col-span-2 cta-band gradient-hover gradient-hover-strong text-white p-8 md:p-10 flex flex-col">
+                <AnimatedHeading direction="left">
+                  <h2 className="heading-sub mb-4">Get in touch</h2>
+                </AnimatedHeading>
+                <p className="text-white/85 leading-relaxed mb-8">
+                  From bespoke film coating systems and excipient compatibility
+                  studies to scale-up trials and regulatory dossiers — our
+                  formulation scientists partner with your team across every CMC
+                  milestone.
+                </p>
+
+                <div className="space-y-2 mt-auto">
+                  <a
+                    href="tel:+917834033063"
+                    aria-label="Call Enrobage India"
+                    className="flex items-start gap-4 rounded-xl p-3 -mx-3 min-h-[44px] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 transition-colors"
+                  >
+                    <span className="shrink-0 w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center">
+                      <Phone size={18} />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block font-semibold">Call Us</span>
+                      <span className="block text-sm text-white/80 leading-relaxed">
+                        +91 78340 33063<br />+91 93125 01750
+                      </span>
+                    </span>
+                  </a>
+
+                  <a
+                    href="mailto:info@enrobage.in"
+                    aria-label="Email Enrobage India"
+                    className="flex items-start gap-4 rounded-xl p-3 -mx-3 min-h-[44px] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 transition-colors"
+                  >
+                    <span className="shrink-0 w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center">
+                      <Mail size={18} />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block font-semibold">Email Us</span>
+                      <span className="block text-sm text-white/80 break-all">
+                        info@enrobage.in
+                      </span>
+                    </span>
+                  </a>
+
+                  <a
+                    href="https://www.linkedin.com/company/enrobage-india-pvt-ltd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Enrobage India on LinkedIn (opens in a new tab)"
+                    className="flex items-start gap-4 rounded-xl p-3 -mx-3 min-h-[44px] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 transition-colors"
+                  >
+                    <span className="shrink-0 w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center">
+                      <Linkedin size={18} />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block font-semibold">LinkedIn</span>
+                      <span className="block text-sm text-white/80">
+                        Enrobage India Pvt. Ltd.
+                      </span>
+                    </span>
+                  </a>
+
+                  <div className="flex items-start gap-4 p-3 -mx-3">
+                    <span className="shrink-0 w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center">
+                      <MapPin size={18} />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block font-semibold">Visit Us</span>
+                      <span className="block text-sm text-white/80 leading-relaxed">
+                        Enrobage India Pvt. Ltd.<br />Kala Amb, Himachal Pradesh 173030
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </aside>
+
+              {/* RIGHT — FORM */}
+              <div className="lg:col-span-3 bg-background p-8 md:p-10">
                 {submitted ? (
-                  <div className="p-12 rounded-3xl card-elevated text-center bg-background">
-                    <div className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center bg-primary/10 animate-scale-in">
+                  <div className="h-full flex flex-col items-center justify-center text-center py-12">
+                    <div className="w-20 h-20 rounded-full mb-6 flex items-center justify-center bg-primary/10">
                       <Send size={32} className="text-primary" />
                     </div>
                     <h3 className="heading-sub text-foreground mb-3">
@@ -97,37 +170,36 @@ const Contact = () => {
                     </p>
                   </div>
                 ) : (
-                  <form
-                    onSubmit={handleSubmit}
-                    className="bg-background rounded-3xl p-8 md:p-10 card-elevated space-y-6"
-                  >
+                  <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="contact-name" className="block text-sm font-medium text-foreground mb-2">
                           Your Name
                         </label>
                         <input
+                          id="contact-name"
                           type="text"
                           value={formState.name}
                           onChange={(e) =>
                             setFormState({ ...formState, name: e.target.value })
                           }
-                          className="w-full bg-muted/50 border border-border/60 rounded-xl px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                          className="w-full bg-white border border-border rounded-xl px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                           placeholder="Full Name"
                           required
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="contact-email" className="block text-sm font-medium text-foreground mb-2">
                           Your Email
                         </label>
                         <input
+                          id="contact-email"
                           type="email"
                           value={formState.email}
                           onChange={(e) =>
                             setFormState({ ...formState, email: e.target.value })
                           }
-                          className="w-full bg-muted/50 border border-border/60 rounded-xl px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                          className="w-full bg-white border border-border rounded-xl px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                           placeholder="Email Address"
                           required
                         />
@@ -136,29 +208,31 @@ const Contact = () => {
 
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="contact-subject" className="block text-sm font-medium text-foreground mb-2">
                           Subject
                         </label>
                         <input
+                          id="contact-subject"
                           type="text"
                           value={formState.subject}
                           onChange={(e) =>
                             setFormState({ ...formState, subject: e.target.value })
                           }
-                          className="w-full bg-muted/50 border border-border/60 rounded-xl px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                          className="w-full bg-white border border-border rounded-xl px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                           placeholder="Subject"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="contact-interest" className="block text-sm font-medium text-foreground mb-2">
                           Coating system of interest
                         </label>
                         <select
+                          id="contact-interest"
                           value={formState.interest}
                           onChange={(e) =>
                             setFormState({ ...formState, interest: e.target.value })
                           }
-                          className="w-full bg-muted/50 border border-border/60 rounded-xl px-4 py-3 text-base text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer"
+                          className="w-full bg-white border border-border rounded-xl px-4 py-3 text-base text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer"
                           required
                         >
                           <option value="" disabled>
@@ -174,25 +248,23 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
+                      <label htmlFor="contact-message" className="block text-sm font-medium text-foreground mb-2">
                         Your Message
                       </label>
                       <textarea
+                        id="contact-message"
                         value={formState.message}
                         onChange={(e) =>
                           setFormState({ ...formState, message: e.target.value })
                         }
                         rows={6}
-                        className="w-full bg-muted/50 border border-border/60 rounded-xl px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none"
+                        className="w-full bg-white border border-border rounded-xl px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none"
                         placeholder="Dosage form, API class, batch size, target release profile, regulatory market…"
                         required
                       />
                     </div>
 
-                    <button
-                      type="submit"
-                      className="group inline-flex items-center gap-3 bg-logo-navy hover:bg-primary text-white font-semibold tracking-wider uppercase text-sm px-8 py-4 rounded-xl transition-all duration-300 hover:-translate-y-0.5 shadow-lg"
-                    >
+                    <button type="submit" className="btn-ombre group">
                       Send Message
                       <Send
                         size={16}
@@ -202,65 +274,6 @@ const Contact = () => {
                   </form>
                 )}
               </div>
-
-              {/* RIGHT — INFO */}
-              <aside className="lg:col-span-5 space-y-6">
-                <div>
-                  <span className="eyebrow">Talk to us</span>
-                  <AnimatedHeading direction="left"><h2 className="section-heading heading-section mb-5 tracking-tight">
-                    Get in touch
-                  </h2></AnimatedHeading>
-                  <p className="text-muted-foreground leading-relaxed">
-                    From bespoke film coating systems and excipient compatibility
-                    studies to scale-up trials and regulatory dossiers — our
-                    formulation scientists partner with your team across every CMC
-                    milestone.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <a
-                    href="tel:+917834033063"
-                    className="group p-5 rounded-2xl bg-background card-elevated hover:-translate-y-1 transition-all duration-500"
-                  >
-                    <div className="w-11 h-11 rounded-full flex items-center justify-center mb-3 text-white transition-colors" style={{ background: "hsl(var(--logo-navy))" }}>
-                      <Phone size={18} />
-                    </div>
-                    <div className="font-display font-bold text-foreground">Call Us</div>
-                    <div className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      +91 78340 33063<br />+91 93125 01750
-                    </div>
-                  </a>
-
-                  <a
-                    href="mailto:info@enrobage.in"
-                    className="group p-5 rounded-2xl bg-background card-elevated hover:-translate-y-1 transition-all duration-500"
-                  >
-                    <div className="w-11 h-11 rounded-full flex items-center justify-center mb-3 text-white transition-colors" style={{ background: "hsl(var(--logo-navy))" }}>
-                      <Mail size={18} />
-                    </div>
-                    <div className="font-display font-bold text-foreground">Email Us</div>
-                    <div className="text-xs text-muted-foreground mt-1 break-all">
-                      info@enrobage.in
-                    </div>
-                  </a>
-
-                  <a
-                    href="https://www.linkedin.com/company/enrobage-india-pvt-ltd"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group p-5 rounded-2xl bg-background card-elevated hover:-translate-y-1 transition-all duration-500 col-span-2"
-                  >
-                    <div className="w-11 h-11 rounded-full flex items-center justify-center mb-3 text-white transition-colors" style={{ background: "hsl(var(--logo-navy))" }}>
-                      <Linkedin size={18} />
-                    </div>
-                    <div className="font-display font-bold text-foreground">LinkedIn</div>
-                    <div className="text-xs text-muted-foreground mt-1">
-                      Enrobage India Pvt. Ltd.
-                    </div>
-                  </a>
-                </div>
-              </aside>
             </div>
           </div>
         </section>

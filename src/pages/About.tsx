@@ -55,45 +55,46 @@ const JOURNEY_COLORS = [
 ];
 
 const InteractiveJourney = () => {
-  const [active, setActive] = useState(0);
-  const [hovered, setHovered] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
+  // 0 -> 1 as the section scrolls through the viewport. Drives the traveling pill.
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    if (!sectionRef.current) return;
-    const io = new IntersectionObserver(
-      ([e]) => setInView(e.isIntersecting),
-      { threshold: 0.35 }
-    );
-    io.observe(sectionRef.current);
-    return () => io.disconnect();
+    const el = sectionRef.current;
+    if (!el) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      // Pill travels as the section passes the 60% line of the viewport.
+      const p = Math.min(1, Math.max(0, ((vh * 0.6) - rect.top) / rect.height));
+      setProgress(p);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
-  useEffect(() => {
-    if (!inView) return;
-    const id = setInterval(
-      () => setActive((a) => (a + 1) % timeline.length),
-      4000
-    );
-    return () => clearInterval(id);
-  }, [inView]);
-
-
+  const lastIdx = timeline.length - 1;
+  // Nearest node to the pill — drives card highlight/colors.
+  const active = Math.min(lastIdx, Math.max(0, Math.round(progress * lastIdx)));
   const color = JOURNEY_COLORS[active];
-  const nextColor = JOURNEY_COLORS[(active + 1) % JOURNEY_COLORS.length];
-  // Position along rail (0 -> 100%)
-  const pct = (active / (timeline.length - 1)) * 100;
-  // Rotate accumulates so hexagon keeps spinning as it moves
-  const rotation = active * 300;
-  const current = timeline[active];
+  const nextColor = JOURNEY_COLORS[Math.min(active + 1, JOURNEY_COLORS.length - 1)];
+  const pct = progress * 100;
+  // Spin accumulates as the pill travels down the rail.
+  const rotation = progress * 300 * lastIdx;
 
   return (
     <div
       ref={sectionRef}
       className="relative max-w-5xl mx-auto"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       {/* Vertical rail */}
       <div
@@ -102,17 +103,44 @@ const InteractiveJourney = () => {
         aria-hidden="true"
       />
 
-      {/* Progress overlay along rail */}
+      {/* Progress overlay along rail — grows with scroll */}
       <div
         className="absolute left-6 md:left-1/2 top-0 w-[3px] md:-translate-x-1/2 rounded-full"
         style={{
           background: `linear-gradient(180deg, ${JOURNEY_COLORS[0]} 0%, ${color} 100%)`,
           height: `${pct}%`,
-          transition: "height 1000ms cubic-bezier(0.65,0,0.35,1), background 900ms ease",
+          transition: "background 900ms ease",
           boxShadow: `0 0 24px ${color}80`,
         }}
         aria-hidden="true"
       />
+
+      {/* Traveling octagon pill — glides down the rail in lock-step with scroll */}
+      <div
+        className="absolute left-6 md:left-1/2 -translate-x-1/2 z-20 pointer-events-none"
+        style={{
+          top: `${pct}%`,
+          transform: "translate(-50%, -50%)",
+          transition: "top 120ms linear",
+        }}
+        aria-hidden="true"
+      >
+        <div
+          className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center"
+          style={{
+            background: `linear-gradient(135deg, ${color} 0%, ${nextColor} 100%)`,
+            clipPath: HEX_CLIP,
+            transform: `rotate(${rotation}deg)`,
+            transition: "background 900ms ease",
+            filter: `drop-shadow(0 10px 24px ${color}80)`,
+          }}
+        >
+          <span
+            className="w-3 h-3 rounded-full bg-white"
+            style={{ transform: `rotate(-${rotation}deg)` }}
+          />
+        </div>
+      </div>
 
       <ol className="relative space-y-8 md:space-y-10 py-4">
         {timeline.map((t, i) => {
@@ -126,8 +154,7 @@ const InteractiveJourney = () => {
               className="relative md:grid md:grid-cols-2 md:gap-12 items-center"
             >
               {/* Node marker */}
-              <button
-                onClick={() => setActive(i)}
+              <div
                 aria-label={`${t.year} ${t.title}`}
                 className="absolute left-6 md:left-1/2 -translate-x-1/2 top-6 md:top-1/2 md:-translate-y-1/2 z-10 group"
               >
@@ -149,7 +176,7 @@ const InteractiveJourney = () => {
                     aria-hidden="true"
                   />
                 )}
-              </button>
+              </div>
 
               {/* Card */}
               <div
@@ -157,8 +184,7 @@ const InteractiveJourney = () => {
                   rightSide ? "md:col-start-2 md:pl-10" : "md:col-start-1 md:pr-10 md:text-right"
                 }`}
               >
-                <button
-                  onClick={() => setActive(i)}
+                <div
                   className={`group text-left w-full block rounded-2xl bg-white p-6 md:p-7 shadow-[0_10px_30px_rgba(15,42,84,0.08)] border transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(15,42,84,0.15)] ${
                     isActive ? "scale-[1.02]" : "opacity-70 hover:opacity-100"
                   }`}
@@ -197,35 +223,8 @@ const InteractiveJourney = () => {
                   <p className="text-sm md:text-base text-foreground/75 leading-relaxed">
                     {t.desc}
                   </p>
-                </button>
-              </div>
-
-              {/* Floating hexagon glides to the active node */}
-              {isActive && (
-                <div
-                  className="absolute left-6 md:left-1/2 -translate-x-1/2 top-6 md:top-1/2 md:-translate-y-1/2 z-20 pointer-events-none"
-                  style={{
-                    transition: "top 900ms cubic-bezier(0.65,0,0.35,1)",
-                  }}
-                >
-                  <div
-                    className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center"
-                    style={{
-                      background: `linear-gradient(135deg, ${color} 0%, ${nextColor} 100%)`,
-                      clipPath: HEX_CLIP,
-                      transform: `rotate(${rotation}deg)`,
-                      transition:
-                        "transform 1200ms cubic-bezier(0.65,0,0.35,1), background 900ms ease",
-                      filter: `drop-shadow(0 10px 24px ${color}80)`,
-                    }}
-                  >
-                    <span
-                      className="w-3 h-3 rounded-full bg-white"
-                      style={{ transform: `rotate(-${rotation}deg)` }}
-                    />
-                  </div>
                 </div>
-              )}
+              </div>
             </li>
           );
         })}
@@ -239,6 +238,18 @@ const InteractiveJourney = () => {
 const About = () => {
   const { ref: valRef, isVisible: valVisible } = useScrollReveal();
   const globeRef = useRef<any>(null);
+  // Responsive globe size: small enough to fit the card on mobile, large/prominent on desktop.
+  const [globeSize, setGlobeSize] = useState(560);
+
+  useEffect(() => {
+    const updateSize = () => {
+      const w = window.innerWidth;
+      setGlobeSize(w < 640 ? Math.min(w - 96, 300) : w < 1024 ? 380 : 560);
+    };
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
 
   useEffect(() => {
     if (globeRef.current) {
@@ -248,7 +259,7 @@ const About = () => {
       controls.enableZoom = false;
       globeRef.current.pointOfView({ lat: 22, lng: 78, altitude: 2.2 }, 0);
     }
-  }, []);
+  }, [globeSize]);
 
 
   return (
@@ -438,12 +449,12 @@ const About = () => {
         <section className="relative bg-white py-16 md:py-20">
           <div className="container-x">
           <div
-            className="relative w-full rounded-3xl"
+            className="relative w-full rounded-3xl overflow-hidden"
             style={{
               background: `linear-gradient(115deg, ${PETAL.navy} 0%, ${PETAL.blue} 55%, ${PETAL.cyan} 100%)`,
             }}
           >
-            <div className="px-[5%] py-10 md:py-12 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+            <div className="px-[5%] py-10 md:py-12 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center lg:min-h-[520px]">
               <div className="text-white">
                 <span className="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase font-semibold text-white/80 mb-4">
                   <Sparkles size={14} /> Worldwide Reach
@@ -470,12 +481,13 @@ const About = () => {
                 >
                   <Globe
                     ref={globeRef}
-                    width={620}
-                    height={620}
+                    width={globeSize}
+                    height={globeSize}
                     backgroundColor="rgba(0,0,0,0)"
                     globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
                     atmosphereColor="#7ec8ff"
                     atmosphereAltitude={0.22}
+                    enablePointerInteraction={false}
                   />
                 </div>
               </div>

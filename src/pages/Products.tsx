@@ -381,6 +381,7 @@ const Products = () => {
                           <img
                             src={bgImage}
                             alt=""
+                            aria-hidden="true"
                             loading="lazy"
                             width={1024}
                             height={1024}
@@ -484,7 +485,7 @@ const Products = () => {
 
       </div>
       <Dialog open={!!openProduct} onOpenChange={(o) => !o && setOpenProduct(null)}>
-        <DialogContent className="w-[92vw] max-w-5xl max-h-[88vh] min-h-[60vh] overflow-y-auto p-8 md:p-12">
+        <DialogContent className="w-[92vw] max-w-5xl max-h-[90vh] overflow-y-auto p-8 md:p-12">
           {openProduct && (
             <>
               <DialogHeader className="space-y-0">

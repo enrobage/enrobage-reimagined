@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { services } from "@/data/supportServices";
-import ctaTablets from "@/assets/cta-tablets-wave.png.asset.json";
+import ctaTablets from "@/assets/cta-tablets-wave.png";
 
 const PETAL = {
   cyan: "hsl(195,75%,65%)",
@@ -115,7 +115,7 @@ const Support = () => {
               <div
                 className="pointer-events-none absolute inset-0"
                 style={{
-                  backgroundImage: `url(${ctaTablets.url})`,
+                  backgroundImage: `url(${ctaTablets})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center 45%",
                   mixBlendMode: "overlay",

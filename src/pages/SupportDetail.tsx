@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { getService, services } from "@/data/supportServices";
-import ctaTablets from "@/assets/cta-tablets-wave.png.asset.json";
+import ctaTablets from "@/assets/cta-tablets-wave.png";
 
 const PETAL = {
   cyan: "hsl(195,75%,65%)",
@@ -158,7 +158,7 @@ const SupportDetail = () => {
               <div
                 className="pointer-events-none absolute inset-0"
                 style={{
-                  backgroundImage: `url(${ctaTablets.url})`,
+                  backgroundImage: `url(${ctaTablets})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center 45%",
                   mixBlendMode: "overlay",

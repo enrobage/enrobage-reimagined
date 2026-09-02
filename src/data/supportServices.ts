@@ -1,6 +1,6 @@
-import shadeGuide from "@/assets/shade-colour-guide.png.asset.json";
-import whoGmp from "@/assets/who-gmp.png.asset.json";
-import blueTablet from "@/assets/bagecoat-blue-tablet.png.asset.json";
+import shadeGuide from "@/assets/shade-colour-guide.png";
+import whoGmp from "@/assets/who-gmp.png";
+import blueTablet from "@/assets/bagecoat-blue-tablet.png";
 
 export type Service = {
   slug: string;
@@ -17,7 +17,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "shade-development-selection",
-    image: shadeGuide.url,
+    image: shadeGuide,
     bgColor: "#ffffff",
     title: "Shade Development & Selection",
     eyebrow: "Colour Science",
@@ -49,7 +49,7 @@ export const services: Service[] = [
   },
   {
     slug: "regulatory-documentation-support",
-    image: whoGmp.url,
+    image: whoGmp,
     bgColor: "#ffffff",
     title: "Regulatory & Documentation Support",
     eyebrow: "Compliance",
@@ -87,7 +87,7 @@ export const services: Service[] = [
   },
   {
     slug: "process-troubleshooting-assistance",
-    image: blueTablet.url,
+    image: blueTablet,
     bgColor: "#ffffff",
     title: "Process & Troubleshooting Assistance",
     eyebrow: "Process Engineering",

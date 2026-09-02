@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarDays, Sparkles } from "lucide-react";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
-import ctaTablets from "@/assets/cta-tablets-wave.png.asset.json";
+import ctaTablets from "@/assets/cta-tablets-wave.png";
 import blogHero from "@/assets/blog-hero-tablet.png";
 
 const PETAL = {
@@ -150,7 +150,7 @@ const Blog = () => {
               <div
                 className="pointer-events-none absolute inset-0"
                 style={{
-                  backgroundImage: `url(${ctaTablets.url})`,
+                  backgroundImage: `url(${ctaTablets})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center 45%",
                   mixBlendMode: "overlay",

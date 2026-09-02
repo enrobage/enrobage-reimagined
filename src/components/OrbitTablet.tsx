@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import tabletAsset from "@/assets/products-tablet.png.asset.json";
+import tabletAsset from "@/assets/products-tablet.png";
 
 // Enrobage / Bagecoat petal palette
 const HUES = [
@@ -69,7 +69,7 @@ export const OrbitTablet = () => {
         >
           {/* Base tablet image */}
           <img
-            src={tabletAsset.url}
+            src={tabletAsset}
             alt="Bagecoat film-coated tablet"
             className="absolute inset-0 w-full h-full object-contain select-none"
             draggable={false}

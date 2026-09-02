@@ -5,9 +5,8 @@ const ScrollPlayVideo = lazy(() => import("@/components/ScrollPlayVideo"));
 import { useScrollReveal, useCountUp } from "@/hooks/use-scroll-reveal";
 import { ArrowRight, Download, FlaskConical, Sparkles, TrendingUp, Globe2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import bagecoatPortfolio from "@/assets/bagecoat-portfolio.png.asset.json";
-import ctaTablets from "@/assets/cta-tablets-wave.png.asset.json";
-import bagecoatLogoTablets from "@/assets/bagecoat-logo-tablets.png.asset.json";
+import ctaTablets from "@/assets/cta-tablets-wave.png";
+import bagecoatLogoTablets from "@/assets/bagecoat-logo-tablets.png";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
 
 
@@ -216,7 +215,7 @@ const Index = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 <div className="relative bg-white flex items-center justify-center min-h-[380px] lg:min-h-[520px] overflow-hidden">
                   <img
-                    src={bagecoatLogoTablets.url}
+                    src={bagecoatLogoTablets}
                     alt="Bagecoat™ logo with colorful coated tablets"
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                   />
@@ -373,7 +372,7 @@ const Index = () => {
             <div
               className="pointer-events-none absolute inset-0"
               style={{
-                backgroundImage: `url(${ctaTablets.url})`,
+                backgroundImage: `url(${ctaTablets})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center 45%",
                 mixBlendMode: "overlay",

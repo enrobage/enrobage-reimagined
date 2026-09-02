@@ -9,9 +9,8 @@ import {
   TrendingUp, Globe2, Sparkles,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import aboutTabletsHandAsset from "@/assets/about-tablets-hand.png.asset.json";
-import ctaTablets from "@/assets/cta-tablets-wave.png.asset.json";
-const aboutTabletsHand = aboutTabletsHandAsset.url;
+import aboutTabletsHand from "@/assets/about-tablets-hand.png";
+import ctaTablets from "@/assets/cta-tablets-wave.png";
 
 /* ---------- Brand petal palette ---------- */
 const PETAL = {
@@ -515,7 +514,7 @@ const About = () => {
               <div
                 className="pointer-events-none absolute inset-0"
                 style={{
-                  backgroundImage: `url(${ctaTablets.url})`,
+                  backgroundImage: `url(${ctaTablets})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center 45%",
                   mixBlendMode: "overlay",

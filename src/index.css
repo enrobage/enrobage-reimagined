@@ -1,0 +1,927 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 40% 13%;
+    --card: 220 20% 97%;
+    --card-foreground: 220 40% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 40% 13%;
+    --primary: 220 70% 30%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 20% 95%;
+    --secondary-foreground: 220 40% 13%;
+    --muted: 220 15% 94%;
+    --muted-foreground: 220 10% 46%;
+    --accent: 220 70% 30%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 220 70% 30%;
+    --radius: 0.75rem;
+
+    /* Bagecoat petal palette ONLY — cyan, blue, navy, purple, magenta.
+       Legacy names retained but remapped to petal hues so the whole site stays on-palette. */
+    --logo-cyan:   195 75% 65%;
+    --logo-blue:   215 75% 50%;
+    --logo-navy:   228 65% 28%;
+    --logo-purple: 278 55% 38%;
+    --logo-red:    312 60% 45%; /* magenta petal */
+    --logo-yellow: 195 75% 65%; /* alias → cyan */
+    --logo-orange: 205 80% 55%; /* alias → light-blue */
+    --logo-green:  235 70% 35%; /* alias → deep blue */
+    /* Reference electric blue used for icons & accents */
+    --ref-blue: 222 100% 56%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply text-foreground font-sans antialiased;
+    /* Very light, airy page background */
+    background: hsl(0 0% 100%);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 500; }
+  strong, b { font-family: 'Source Sans 3', sans-serif; font-weight: 700; }
+}
+
+/* Reference green → blue ombre */
+.gradient-green-blue {
+  background: linear-gradient(115deg,
+    hsl(160 65% 45%) 0%,
+    hsl(180 65% 45%) 35%,
+    hsl(200 80% 52%) 70%,
+    hsl(215 75% 50%) 100%);
+}
+.gradient-green-blue-soft {
+  background: linear-gradient(115deg,
+    hsl(160 65% 45% / 0.92) 0%,
+    hsl(190 70% 48% / 0.92) 50%,
+    hsl(215 75% 50% / 0.92) 100%);
+}
+
+/* Blue-purple hover gradient flow (used for CTA buttons) */
+.blue-purple-flow {
+  background: linear-gradient(90deg, hsl(var(--logo-blue)), hsl(var(--logo-purple)), hsl(var(--logo-blue)));
+  background-size: 200% 100%;
+}
+.blue-purple-flow:hover {
+  animation: bluePurpleFlow 3s ease infinite;
+}
+@keyframes bluePurpleFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Section card — 10% side gutters sitewide */
+.section-card {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  background: hsl(0 0% 100%);
+  border: none;
+  border-radius: 0;
+  padding: 3.5rem 4.2%;
+  box-shadow: none;
+}
+@media (min-width: 768px) {
+  .section-card { padding: 4.2rem 4.2%; }
+}
+@media (min-width: 1024px) {
+  .section-card { padding: 4.9rem 4.2%; }
+}
+.section-card.tinted {
+  background: hsl(0 0% 100%);
+  border-color: hsl(var(--border) / 0.6);
+}
+.section-card.dark {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+/* Full-bleed section — 10% side gutters, edge-to-edge background */
+.section-full {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 3.5rem 4.2%;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+@media (min-width: 768px) {
+  .section-full { padding: 4.2rem 4.2%; }
+}
+@media (min-width: 1024px) {
+  .section-full { padding: 4.9rem 4.2%; }
+}
+.section-full.cta-band {
+  color: white;
+}
+.section-full.tinted {
+  background: hsl(0 0% 100%);
+}
+
+/* Inner container — full width; section padding (10%) provides the gutters */
+.section-inner {
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}
+
+/* Let text/content blocks expand edge-to-edge inside our sections.
+   The 10% side padding on .section-card / .section-full provides the only gutters. */
+.section-card .max-w-xl,
+.section-card .max-w-2xl,
+.section-card .max-w-3xl,
+.section-card .max-w-4xl,
+.section-card .max-w-5xl,
+.section-card .max-w-6xl,
+.section-card .max-w-7xl,
+.section-full .max-w-xl,
+.section-full .max-w-2xl,
+.section-full .max-w-3xl,
+.section-full .max-w-4xl,
+.section-full .max-w-5xl,
+.section-full .max-w-6xl,
+.section-full .max-w-7xl {
+  max-width: 100% !important;
+}
+
+/* Colorful accent strip under section headings — petal palette */
+.heading-accent {
+  display: inline-block;
+  width: 72px;
+  height: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg,
+    hsl(var(--logo-cyan)),
+    hsl(var(--logo-blue)),
+    hsl(var(--logo-navy)),
+    hsl(var(--logo-purple)),
+    hsl(var(--logo-red)));
+  margin: 0 auto 1.25rem;
+}
+
+/* Scroll-driven micro animations (modern browsers) */
+@supports (animation-timeline: view()) {
+  .scroll-fade {
+    animation: scroll-fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+  .scroll-fade-soft {
+    animation: scroll-fade-soft linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+}
+@keyframes scroll-fade-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scroll-fade-soft {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+html { scroll-behavior: smooth; }
+html, body { overflow-x: hidden; max-width: 100%; }
+img, video, canvas { max-width: 100%; }
+
+/* Mobile: keep long product / brand names from overflowing */
+@media (max-width: 640px) {
+  h1, h2, h3, h4, p, span, a { overflow-wrap: break-word; }
+  .btn-ombre { width: 100%; justify-content: center; }
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: hsl(var(--background)); }
+::-webkit-scrollbar-thumb { background: hsl(var(--primary) / 0.2); border-radius: 3px; }
+
+/* Heading ombre — light blue → blue → navy → purple (matches Bagecoat reference) */
+.gradient-text-logo {
+  background: linear-gradient(90deg,
+    hsl(var(--logo-cyan)) 0%,
+    hsl(var(--logo-blue)) 35%,
+    hsl(var(--logo-navy)) 70%,
+    hsl(var(--logo-purple)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-line-logo {
+  background: linear-gradient(90deg,
+    hsl(var(--logo-cyan)),
+    hsl(var(--logo-blue)),
+    hsl(var(--logo-navy)),
+    hsl(var(--logo-purple)),
+    hsl(var(--logo-red)));
+}
+
+.glass-white {
+  background: hsl(0 0% 100% / 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 4px 30px hsl(220 40% 13% / 0.04);
+}
+
+.card-elevated {
+  background: hsl(0 0% 100%);
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 1px 3px hsl(220 40% 13% / 0.04), 0 10px 40px hsl(220 40% 13% / 0.06);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-elevated:hover {
+  box-shadow: 0 1px 3px hsl(220 40% 13% / 0.04), 0 20px 60px hsl(220 40% 13% / 0.1);
+}
+
+.dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, hsl(var(--primary) / 0.05) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+.mesh-bg {
+  background:
+    radial-gradient(ellipse at 20% 0%, hsl(var(--logo-blue) / 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, hsl(var(--logo-purple) / 0.05) 0%, transparent 50%),
+    hsl(0 0% 100%);
+}
+
+/* Same as mesh-bg but without the purple radial — for hero banners where
+   the purple tint should not appear (Products, Technical Support). */
+.mesh-bg-no-purple {
+  background:
+    radial-gradient(ellipse at 20% 0%, hsl(var(--logo-blue) / 0.06) 0%, transparent 50%),
+    hsl(0 0% 100%);
+}
+
+/* Flat off-white hero background, matching the image backgrounds on the
+   technical support detail pages. */
+.hero-off-white {
+  background: hsl(0 0% 97%);
+}
+
+/* Polaroid photo frame for card thumbnails */
+.polaroid {
+  background: #fff;
+  padding: 14px 14px 0 14px;
+  box-shadow: 0 6px 22px -10px hsl(220 40% 13% / 0.28),
+              0 2px 6px -2px hsl(220 40% 13% / 0.12);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .polaroid {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px -12px hsl(220 40% 13% / 0.38),
+              0 4px 10px -2px hsl(220 40% 13% / 0.18);
+}
+
+/* Colorcon-style curved hero — blue gradient with bottom wave clip */
+.hero-curve {
+  background: linear-gradient(135deg, hsl(var(--logo-blue)) 0%, hsl(var(--logo-navy)) 100%);
+  position: relative;
+}
+.hero-curve::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 80px;
+  background: hsl(var(--background));
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, transparent 60%, black 60%);
+          mask-image: radial-gradient(120% 100% at 50% 0%, transparent 60%, black 60%);
+}
+@media (min-width: 768px) {
+  .hero-curve::after { height: 120px; }
+}
+
+/* White separator strip between footer and content */
+.rainbow-strip {
+  height: 8px;
+  background: hsl(0 0% 100%);
+}
+
+/* Hexagon outline accent (Colorcon-style decoration) */
+.hex-ring {
+  position: absolute;
+  border: 6px solid currentColor;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: transparent;
+}
+
+/* Colorcon-style hexagon shape (filled) */
+.hex-shape {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* Colorcon-style section divider: thin lines flanking a small hex */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: hsl(var(--border));
+}
+.section-divider .hex {
+  width: 44px;
+  height: 44px;
+  background: hsl(var(--logo-blue));
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+/* Pill outline button — Colorcon style */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 2rem;
+  border-radius: 9999px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: linear-gradient(90deg,
+    hsl(var(--logo-cyan)) 0%,
+    hsl(var(--logo-blue)) 28%,
+    hsl(var(--logo-navy)) 55%,
+    hsl(var(--logo-purple)) 80%,
+    hsl(var(--logo-red)) 100%);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  box-shadow: 0 8px 24px hsl(var(--logo-blue) / 0.25);
+  transition: background-position 0.6s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+.btn-pill:hover {
+  background-position: 100% 50%;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 36px hsl(var(--logo-purple) / 0.35);
+  color: #fff;
+}
+.btn-pill-light {
+  background: #fff !important;
+  color: hsl(var(--logo-navy)) !important;
+  box-shadow: 0 8px 24px hsl(220 40% 13% / 0.18);
+}
+.btn-pill-light:hover {
+  background: #fff !important;
+  color: hsl(var(--logo-purple)) !important;
+  box-shadow: 0 14px 36px hsl(220 40% 13% / 0.28);
+}
+
+/* Hide small eyebrow labels site-wide */
+.eyebrow { display: none !important; }
+
+/* (legacy eyebrow definition removed; see updated rule below) */
+/* Eyebrow label — small bordered pill (consulting/reference style) */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: hsl(var(--logo-blue));
+  margin-bottom: 1.25rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 9999px;
+  background: hsl(0 0% 100%);
+}
+.eyebrow::before { display: none; }
+.eyebrow::after { display: none; }
+
+/* Premium card — subtle gradient ring, refined shadow */
+.premium-card {
+  position: relative;
+  background: hsl(0 0% 100%);
+  border: 1px solid hsl(var(--border));
+  border-radius: 1.25rem;
+  box-shadow:
+    0 1px 2px hsl(220 40% 13% / 0.04),
+    0 8px 24px hsl(220 40% 13% / 0.05);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease;
+}
+.premium-card:hover {
+  transform: translateY(-4px);
+  border-color: hsl(var(--logo-blue) / 0.35);
+  box-shadow:
+    0 1px 2px hsl(220 40% 13% / 0.04),
+    0 24px 60px hsl(220 70% 30% / 0.12);
+}
+
+/* Ombre button — petal palette (matches heading ombre) */
+.btn-ombre {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 2rem;
+  border-radius: 9999px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: linear-gradient(90deg,
+    hsl(var(--logo-cyan)) 0%,
+    hsl(var(--logo-blue)) 28%,
+    hsl(var(--logo-navy)) 55%,
+    hsl(var(--logo-purple)) 80%,
+    hsl(var(--logo-red)) 100%);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  box-shadow: 0 8px 24px hsl(var(--logo-blue) / 0.25);
+  transition: background-position 0.6s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn-ombre:hover {
+  background-position: 100% 50%;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 36px hsl(var(--logo-purple) / 0.35);
+}
+
+/* Decorative CTA band — Bagecoat petal ombre */
+.cta-band {
+  position: relative;
+  background: linear-gradient(115deg,
+    hsl(var(--logo-cyan)) 0%,
+    hsl(var(--logo-blue)) 30%,
+    hsl(var(--logo-navy)) 60%,
+    hsl(var(--logo-purple)) 85%,
+    hsl(var(--logo-red)) 100%);
+  overflow: hidden;
+  isolation: isolate;
+  color: white;
+}
+.cta-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, hsl(0 0% 100% / 0.10) 1px, transparent 0);
+  background-size: 28px 28px;
+  opacity: 0.45;
+  z-index: -1;
+}
+
+/* Section divider with hex */
+.divider-soft {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
+}
+
+/* Stat divider (vertical hairline) */
+.stat-divider {
+  background: linear-gradient(180deg, transparent, hsl(var(--border)), transparent);
+}
+
+/* Clean section heading — petal-palette gradient text.
+   line-height 1.2 + padding-bottom prevents descenders/caps from being clipped. */
+.section-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  padding-bottom: 0.18em;
+  background: linear-gradient(90deg,
+    hsl(var(--logo-cyan)) 0%,
+    hsl(var(--logo-blue)) 35%,
+    hsl(var(--logo-navy)) 70%,
+    hsl(var(--logo-purple)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Same anti-clip for hero gradient-text-logo headlines */
+.gradient-text-logo {
+  display: inline-block;
+  line-height: 1.15;
+  padding-bottom: 0.12em;
+}
+
+
+
+/* Animations */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slide-up 0.8s ease-out forwards; }
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in-left { animation: slide-in-left 0.8s ease-out forwards; }
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in-right { animation: slide-in-right 0.8s ease-out forwards; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+.animate-float { animation: float 5s ease-in-out infinite; }
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 20s linear infinite; }
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+.animate-pulse-soft { animation: pulse-soft 3s ease-in-out infinite; }
+
+@keyframes logo-breathe {
+  0%   { opacity: 0; transform: translateY(24px); filter: blur(14px) saturate(0.6); }
+  60%  { opacity: 1; transform: translateY(-2px); filter: blur(0) saturate(1.1); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0) saturate(1); }
+}
+@keyframes logo-idle {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.animate-logo-breathe {
+  opacity: 0;
+  transform-origin: center center;
+  animation:
+    logo-breathe 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    logo-idle 5s ease-in-out 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, hsl(0 0% 100% / 0.4) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Bagecoat dot color cycle (yellow → orange → red → purple → navy → blue → cyan → green) */
+@keyframes dot-cycle {
+  0%   { background-color: hsl(var(--logo-yellow)); box-shadow: 0 0 8px hsl(var(--logo-yellow) / 0.5); }
+  14%  { background-color: hsl(var(--logo-orange)); box-shadow: 0 0 8px hsl(var(--logo-orange) / 0.5); }
+  28%  { background-color: hsl(var(--logo-red));    box-shadow: 0 0 8px hsl(var(--logo-red) / 0.5); }
+  42%  { background-color: hsl(var(--logo-purple)); box-shadow: 0 0 8px hsl(var(--logo-purple) / 0.5); }
+  57%  { background-color: hsl(var(--logo-navy));   box-shadow: 0 0 8px hsl(var(--logo-navy) / 0.5); }
+  71%  { background-color: hsl(var(--logo-blue));   box-shadow: 0 0 8px hsl(var(--logo-blue) / 0.5); }
+  85%  { background-color: hsl(var(--logo-cyan));   box-shadow: 0 0 8px hsl(var(--logo-cyan) / 0.5); }
+  100% { background-color: hsl(var(--logo-green));  box-shadow: 0 0 8px hsl(var(--logo-green) / 0.5); }
+}
+.animate-dot-cycle {
+  background-color: hsl(var(--logo-blue));
+  animation: dot-cycle 4s linear infinite;
+}
+
+/* Marquee */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Magnetic hover */
+.magnetic { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* Page transition */
+.page-enter {
+  animation: slide-up 0.5s ease-out;
+}
+
+/* Cursor glow - applied via JS */
+.cursor-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle, hsl(var(--logo-blue) / 0.06) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: left 0.15s ease-out, top 0.15s ease-out;
+}
+
+/* Tilt card */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+}
+.tilt-card > * {
+  transform: translateZ(20px);
+}
+
+/* Capsule float animations for Products hero */
+@keyframes capsule-float-1 {
+  0%, 100% { transform: translate(0, 0) rotate(-15deg); }
+  50% { transform: translate(-6px, -14px) rotate(-22deg); }
+}
+@keyframes capsule-float-2 {
+  0%, 100% { transform: translate(0, 0) rotate(25deg); }
+  50% { transform: translate(8px, -10px) rotate(32deg); }
+}
+@keyframes capsule-float-3 {
+  0%, 100% { transform: translate(0, 0) rotate(-40deg); }
+  50% { transform: translate(-4px, -16px) rotate(-48deg); }
+}
+.capsule-float-1 { animation: capsule-float-1 3.6s ease-in-out infinite; }
+.capsule-float-2 { animation: capsule-float-2 4.2s ease-in-out infinite; }
+.capsule-float-3 { animation: capsule-float-3 3.9s ease-in-out infinite; }
+
+/* Hero bottle gentle float + sway */
+@keyframes hero-bottle-float {
+  0%, 100% { transform: scaleX(-1) translateY(0) rotate(0deg); }
+  50% { transform: scaleX(-1) translateY(-12px) rotate(-1.5deg); }
+}
+.hero-bottle-float {
+  animation: hero-bottle-float 5s ease-in-out infinite;
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
+/* Hand-drawn oval scribble for hero headline */
+@keyframes draw-oval {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Hero image gentle float */
+@keyframes hero-float {
+  0%, 100% { transform: scale(1.4) translateY(0); }
+  50% { transform: scale(1.4) translateY(-10px); }
+}
+.hero-float {
+  animation: hero-float 6s ease-in-out infinite;
+  transform-origin: right center;
+  will-change: transform;
+}
+
+/* Card rise-in on scroll */
+@keyframes card-rise {
+  0% { opacity: 0; transform: translateY(40px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.card-rise {
+  opacity: 0;
+  animation: card-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes journey-pulse {
+  0%, 100% { box-shadow: 0 0 0 6px hsl(var(--logo-blue) / 0.18), 0 0 22px hsl(var(--logo-blue) / 0.45); }
+  50%      { box-shadow: 0 0 0 10px hsl(var(--logo-blue) / 0.10), 0 0 32px hsl(var(--logo-purple) / 0.55); }
+}
+
+/* ============================================================
+   INTERACTIVITY LAYER
+   ============================================================ */
+
+/* Alternating section base (grey panel between white ones) */
+.section-alt {
+  background-color: hsl(220 22% 96.5%) !important;
+}
+
+/* Cursor-tracked gradient glow.
+   Adds an interactive light that follows the pointer inside any element
+   with .gradient-hover — --mx / --my are updated by App.tsx. */
+.gradient-hover {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.gradient-hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 320px at var(--mx, 50%) var(--my, 50%),
+    hsl(var(--logo-cyan) / 0.28),
+    hsl(var(--logo-blue) / 0.18) 35%,
+    hsl(var(--logo-purple) / 0.10) 60%,
+    transparent 75%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 0;
+}
+.gradient-hover:hover::before { opacity: 1; }
+.gradient-hover > * { position: relative; z-index: 1; }
+
+/* Dark / gradient-background variant — brighter glow that reads on color */
+.gradient-hover-strong::before {
+  background: radial-gradient(
+    circle 340px at var(--mx, 50%) var(--my, 50%),
+    hsl(0 0% 100% / 0.35),
+    hsl(0 0% 100% / 0.15) 40%,
+    transparent 75%
+  );
+}
+
+/* Cursor-tracked border that lights up on hover */
+.gradient-hover-border {
+  position: relative;
+}
+.gradient-hover-border::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    circle 220px at var(--mx, 50%) var(--my, 50%),
+    hsl(var(--logo-cyan)),
+    hsl(var(--logo-blue)) 35%,
+    hsl(var(--logo-purple)) 65%,
+    transparent 80%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.gradient-hover-border:hover::after { opacity: 1; }
+
+/* Commitment placards — shared flowing gradient across the row */
+.commit-flow-card {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--logo-cyan))    0%,
+    hsl(var(--logo-blue))   25%,
+    hsl(var(--logo-navy))   50%,
+    hsl(var(--logo-purple)) 75%,
+    hsl(var(--logo-red))   100%,
+    hsl(var(--logo-cyan)) 125%
+  );
+  background-size: 500% 100%;
+  animation: commit-flow 14s linear infinite;
+  will-change: background-position;
+}
+@keyframes commit-flow {
+  0%   { background-position: 0%   50%; }
+  100% { background-position: 500% 50%; }
+}
+.commit-flow-card:hover { animation-play-state: paused; }
+
+/* Reduce global section vertical padding by ~30% (design refresh) */
+section.pt-10  { padding-top: 1.75rem; }
+section.pb-10  { padding-bottom: 1.75rem; }
+section.pt-14  { padding-top: 2.45rem; }
+section.pb-14  { padding-bottom: 2.45rem; }
+section.pt-16  { padding-top: 2.8rem; }
+section.pb-16  { padding-bottom: 2.8rem; }
+section.pt-20  { padding-top: 3.5rem; }
+section.pb-20  { padding-bottom: 3.5rem; }
+section.pt-24  { padding-top: 4.2rem; }
+section.pb-24  { padding-bottom: 4.2rem; }
+section.pt-28  { padding-top: 4.9rem; }
+section.pb-28  { padding-bottom: 4.9rem; }
+section.pt-32  { padding-top: 5.6rem; }
+section.pb-32  { padding-bottom: 5.6rem; }
+section.py-10  { padding-top: 1.75rem; padding-bottom: 1.75rem; }
+section.py-16  { padding-top: 2.8rem;  padding-bottom: 2.8rem; }
+section.py-20  { padding-top: 3.5rem;  padding-bottom: 3.5rem; }
+section.py-24  { padding-top: 4.2rem;  padding-bottom: 4.2rem; }
+section.py-28  { padding-top: 4.9rem;  padding-bottom: 4.9rem; }
+section.py-32  { padding-top: 5.6rem;  padding-bottom: 5.6rem; }
+
+@media (min-width: 768px) {
+  section.md\:pt-10 { padding-top: 1.75rem; }
+  section.md\:pb-10 { padding-bottom: 1.75rem; }
+  section.md\:pt-12 { padding-top: 2.1rem; }
+  section.md\:pb-12 { padding-bottom: 2.1rem; }
+  section.md\:pt-14 { padding-top: 2.45rem; }
+  section.md\:pb-14 { padding-bottom: 2.45rem; }
+  section.md\:pt-16 { padding-top: 2.8rem; }
+  section.md\:pb-16 { padding-bottom: 2.8rem; }
+  section.md\:pt-20 { padding-top: 3.5rem; }
+  section.md\:pb-20 { padding-bottom: 3.5rem; }
+  section.md\:pt-24 { padding-top: 4.2rem; }
+  section.md\:pb-24 { padding-bottom: 4.2rem; }
+  section.md\:pt-28 { padding-top: 4.9rem; }
+  section.md\:pb-28 { padding-bottom: 4.9rem; }
+  section.md\:pt-32 { padding-top: 5.6rem; }
+  section.md\:pb-32 { padding-bottom: 5.6rem; }
+  section.md\:py-16 { padding-top: 2.8rem;  padding-bottom: 2.8rem; }
+  section.md\:py-20 { padding-top: 3.5rem;  padding-bottom: 3.5rem; }
+  section.md\:py-24 { padding-top: 4.2rem;  padding-bottom: 4.2rem; }
+  section.md\:py-28 { padding-top: 4.9rem;  padding-bottom: 4.9rem; }
+  section.md\:py-32 { padding-top: 5.6rem;  padding-bottom: 5.6rem; }
+}
+
+
+/* ============================================================
+   UNIFIED TYPOGRAPHY SCALE
+   One shared heading scale used on every page so hero, section,
+   sub and card headings match across the whole site.
+   ============================================================ */
+.heading-hero,
+.heading-section,
+.heading-sub,
+.heading-cta,
+.heading-card {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.heading-hero {
+  font-size: clamp(2rem, 5.2vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.heading-section {
+  font-size: clamp(1.875rem, 4.4vw, 3.75rem);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+.heading-cta {
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.heading-sub {
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.heading-card {
+  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.25;
+}

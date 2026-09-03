@@ -216,6 +216,12 @@ html { scroll-behavior: smooth; font-size: 17px; }
 html, body { overflow-x: hidden; max-width: 100%; }
 img, video, canvas { max-width: 100%; }
 
+/* Lenis smooth scroll (see use-smooth-scroll.ts): disable native smooth while
+   Lenis is active so the two don't fight; keep native as fallback if it's off. */
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
 /* Mobile: keep long product / brand names from overflowing */
 @media (max-width: 640px) {
   h1, h2, h3, h4, p, span, a { overflow-wrap: break-word; }

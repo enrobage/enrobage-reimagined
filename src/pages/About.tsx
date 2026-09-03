@@ -62,22 +62,37 @@ const InteractiveJourney = () => {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
+    // Raw scroll-derived target; the rendered `progress` eases toward it for a
+    // soft trailing glide. LERP is the feel knob: higher = snappier, lower = floatier.
+    const LERP = 0.1;
+    const target = { current: 0 };
     let raf = 0;
-    const update = () => {
-      raf = 0;
+
+    const computeTarget = () => {
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight || 1;
       // Pill travels as the section passes the 60% line of the viewport.
-      const p = Math.min(1, Math.max(0, ((vh * 0.6) - rect.top) / rect.height));
-      setProgress(p);
+      target.current = Math.min(1, Math.max(0, ((vh * 0.6) - rect.top) / rect.height));
+      if (!raf) raf = requestAnimationFrame(tick);
     };
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    const tick = () => {
+      raf = 0;
+      setProgress((prev) => {
+        const next = prev + (target.current - prev) * LERP;
+        if (Math.abs(target.current - next) > 0.0005) {
+          raf = requestAnimationFrame(tick);
+          return next;
+        }
+        return target.current;
+      });
+    };
+
+    computeTarget();
+    window.addEventListener("scroll", computeTarget, { passive: true });
+    window.addEventListener("resize", computeTarget);
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("scroll", computeTarget);
+      window.removeEventListener("resize", computeTarget);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
@@ -121,7 +136,6 @@ const InteractiveJourney = () => {
         style={{
           top: `${pct}%`,
           transform: "translate(-50%, -50%)",
-          transition: "top 120ms linear",
         }}
         aria-hidden="true"
       >

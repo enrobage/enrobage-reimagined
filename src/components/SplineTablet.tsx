@@ -1,5 +1,6 @@
 import Spline from "@splinetool/react-spline";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import type { Application } from "@splinetool/runtime";
+import { useLayoutEffect, useRef, useState } from "react";
 
 /**
  * The Spline scene has a fixed camera: a smaller canvas crops the model
@@ -12,26 +13,16 @@ const VIRTUAL = 1100;
 // area so the tablet renders larger while the overflow only crops margin.
 const ZOOM = 1.45;
 
+// The 1100px canvas is only ever shown at ~350-400px on screen, so we render
+// the WebGL drawing buffer at a fraction of VIRTUAL (kept square, so framing
+// is unchanged) and CSS-stretch it to fill. Fewer pixels per scroll frame =
+// no more jank. ponytail: sharpness/perf knob — lower is faster but softer.
+const QUALITY = 0.6;
+
 const SplineTablet = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.5);
-
-  // Force the underlying <canvas> rendered by Spline to fill the virtual stage
-  useEffect(() => {
-    const applyCanvasStyle = () => {
-      const canvas = stageRef.current?.querySelector("canvas");
-      if (canvas) {
-        canvas.style.display = "block";
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-      }
-    };
-    applyCanvasStyle();
-    const id = window.setInterval(applyCanvasStyle, 300);
-    window.setTimeout(() => window.clearInterval(id), 4000);
-    return () => window.clearInterval(id);
-  }, []);
 
   useLayoutEffect(() => {
     const el = wrapperRef.current;
@@ -39,10 +30,10 @@ const SplineTablet = () => {
 
     const update = () => {
       const width = el.clientWidth || 1;
-      // never taller than 70% of the viewport, never wider than the column
+      // never taller than 80% of the viewport, never wider than the column
       const maxH = Math.min(window.innerHeight * 0.8, 900);
-      const next = Math.min(width / VIRTUAL, maxH / VIRTUAL);
-      setScale(Math.max(next, 0.15));
+      const next = Math.max(Math.min(width / VIRTUAL, maxH / VIRTUAL), 0.15);
+      setScale(next);
     };
 
     update();
@@ -54,6 +45,19 @@ const SplineTablet = () => {
       window.removeEventListener("resize", update);
     };
   }, []);
+
+  const handleLoad = (app: Application) => {
+    // Shrink the drawing buffer (square -> same framing) to cut per-frame cost.
+    // setSize also turns off Spline's own auto-resize, so it won't fight us.
+    app.setSize(VIRTUAL * QUALITY, VIRTUAL * QUALITY);
+    // Re-stretch the now-smaller canvas to fill the virtual stage.
+    const canvas = stageRef.current?.querySelector("canvas");
+    if (canvas) {
+      canvas.style.display = "block";
+      canvas.style.width = "100%";
+      canvas.style.height = "100%";
+    }
+  };
 
   return (
     <div
@@ -73,6 +77,7 @@ const SplineTablet = () => {
       >
         <Spline
           scene="https://prod.spline.design/dks7-sxpOefn8wlH/scene.splinecode"
+          onLoad={handleLoad}
           style={{ width: "100%", height: "100%" }}
         />
       </div>

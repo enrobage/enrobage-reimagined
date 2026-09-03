@@ -3,8 +3,8 @@ import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarDays, Sparkles } from "lucide-react";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
-import ctaTablets from "@/assets/cta-tablets-wave.png";
-import blogHero from "@/assets/blog-hero-tablet.png";
+import ctaTablets from "@/assets/cta-tablets-wave.webp";
+import blogHero from "@/assets/blog-hero-tablet.webp";
 
 const PETAL = {
   cyan: "hsl(195,75%,65%)",

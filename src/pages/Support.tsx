@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { services } from "@/data/supportServices";
-import ctaTablets from "@/assets/cta-tablets-wave.png";
+import ctaTablets from "@/assets/cta-tablets-wave.webp";
 
 const PETAL = {
   cyan: "hsl(195,75%,65%)",

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Linkedin, Mail, Phone } from "lucide-react";
-import logo from "@/assets/enrobage-logo-clean.png";
+import logo from "@/assets/enrobage-logo-clean.webp";
 
 const CTA_GRADIENT =
   "linear-gradient(90deg, hsl(195,75%,65%) 0%, hsl(215,75%,50%) 32%, hsl(228,65%,28%) 62%, hsl(278,55%,38%) 85%, hsl(312,60%,45%) 100%)";

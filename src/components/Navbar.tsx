@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "@/assets/enrobage-logo-clean.png";
+import logo from "@/assets/enrobage-logo-clean.webp";
 
 const PETAL = {
   cyan: "hsl(195,75%,65%)",

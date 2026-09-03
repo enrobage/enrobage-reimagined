@@ -10,7 +10,7 @@ import { ArrowRight, Download } from "lucide-react";
 
 
 import { Link, useSearchParams } from "react-router-dom";
-import ctaTablets from "@/assets/cta-tablets-wave.png";
+import ctaTablets from "@/assets/cta-tablets-wave.webp";
 
 import {
   Carousel,
@@ -28,26 +28,26 @@ import {
 } from "@/components/ui/dialog";
 
 
-import bagecoatFilm from "@/assets/brochure/logo-film.png";
-import bagecoatEnteric from "@/assets/brochure/logo-enteric.png";
-import bagecoatNutra from "@/assets/brochure/logo-nutra.png";
-import bagecoatPearl from "@/assets/brochure/logo-pearl.png";
-import bagecoatSustainer from "@/assets/brochure/logo-sustainer.png";
-import bagecoatTastytab from "@/assets/brochure/logo-tastytab.png";
-import bagecoatPureview from "@/assets/brochure/logo-pureview.png";
-import bagecoatBlend from "@/assets/brochure/logo-blend.png";
-import bagecoatMoistshield from "@/assets/brochure/logo-moistshield.png";
-import bagecoatEcofrost from "@/assets/brochure/logo-ecofrost.png";
-import bagecoatInstabind from "@/assets/brochure/logo-instabind.png";
-import bagecoatSeal from "@/assets/brochure/logo-seal.png";
-import tabletsTeal from "@/assets/tablets-teal.jpg";
-import tabletsMaroon from "@/assets/tablets-maroon.jpg";
-import tabletsRed from "@/assets/tablets-red.jpg";
-import tabletsPurple from "@/assets/tablets-purple.jpg";
-import tabletsNavy from "@/assets/tablets-navy.jpg";
-import tabletsBlue from "@/assets/tablets-blue.jpg";
-import tabletsCyan from "@/assets/products-card-bg.jpg";
-import tabletsGreen from "@/assets/tablets-green.jpg";
+import bagecoatFilm from "@/assets/brochure/logo-film.webp";
+import bagecoatEnteric from "@/assets/brochure/logo-enteric.webp";
+import bagecoatNutra from "@/assets/brochure/logo-nutra.webp";
+import bagecoatPearl from "@/assets/brochure/logo-pearl.webp";
+import bagecoatSustainer from "@/assets/brochure/logo-sustainer.webp";
+import bagecoatTastytab from "@/assets/brochure/logo-tastytab.webp";
+import bagecoatPureview from "@/assets/brochure/logo-pureview.webp";
+import bagecoatBlend from "@/assets/brochure/logo-blend.webp";
+import bagecoatMoistshield from "@/assets/brochure/logo-moistshield.webp";
+import bagecoatEcofrost from "@/assets/brochure/logo-ecofrost.webp";
+import bagecoatInstabind from "@/assets/brochure/logo-instabind.webp";
+import bagecoatSeal from "@/assets/brochure/logo-seal.webp";
+import tabletsTeal from "@/assets/tablets-teal.webp";
+import tabletsMaroon from "@/assets/tablets-maroon.webp";
+import tabletsRed from "@/assets/tablets-red.webp";
+import tabletsPurple from "@/assets/tablets-purple.webp";
+import tabletsNavy from "@/assets/tablets-navy.webp";
+import tabletsBlue from "@/assets/tablets-blue.webp";
+import tabletsCyan from "@/assets/products-card-bg.webp";
+import tabletsGreen from "@/assets/tablets-green.webp";
 
 const BRAND_TABLETS = [
   tabletsTeal,

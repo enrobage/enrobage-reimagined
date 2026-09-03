@@ -1,6 +1,6 @@
-import shadeGuide from "@/assets/shade-colour-guide.png";
-import whoGmp from "@/assets/who-gmp.png";
-import blueTablet from "@/assets/bagecoat-blue-tablet.png";
+import shadeGuide from "@/assets/shade-colour-guide.webp";
+import whoGmp from "@/assets/who-gmp.webp";
+import blueTablet from "@/assets/bagecoat-blue-tablet.webp";
 
 export type Service = {
   slug: string;

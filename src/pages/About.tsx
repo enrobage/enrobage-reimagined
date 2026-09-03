@@ -9,8 +9,8 @@ import {
   TrendingUp, Globe2, Sparkles,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import aboutTabletsHand from "@/assets/about-tablets-hand.png";
-import ctaTablets from "@/assets/cta-tablets-wave.png";
+import aboutTabletsHand from "@/assets/about-tablets-hand.webp";
+import ctaTablets from "@/assets/cta-tablets-wave.webp";
 
 /* ---------- Brand petal palette ---------- */
 const PETAL = {

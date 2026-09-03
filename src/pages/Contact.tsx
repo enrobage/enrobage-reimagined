@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { Mail, Phone, Send, Linkedin, MapPin } from "lucide-react";
 import { useState } from "react";
-import contactHero from "@/assets/contact-hero.jpg";
+import contactHero from "@/assets/contact-hero.webp";
 import { Link } from "react-router-dom";
 
 const Contact = () => {

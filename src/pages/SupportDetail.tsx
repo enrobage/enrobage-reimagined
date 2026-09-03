@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { getService, services } from "@/data/supportServices";
-import ctaTablets from "@/assets/cta-tablets-wave.png";
+import ctaTablets from "@/assets/cta-tablets-wave.webp";
 
 const PETAL = {
   cyan: "hsl(195,75%,65%)",

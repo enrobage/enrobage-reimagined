@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import tabletAsset from "@/assets/products-tablet.png";
+import tabletAsset from "@/assets/products-tablet.webp";
 
 // Enrobage / Bagecoat petal palette
 const HUES = [

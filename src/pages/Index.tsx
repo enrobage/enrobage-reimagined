@@ -5,8 +5,8 @@ const ScrollPlayVideo = lazy(() => import("@/components/ScrollPlayVideo"));
 import { useScrollReveal, useCountUp } from "@/hooks/use-scroll-reveal";
 import { ArrowRight, Download, FlaskConical, Sparkles, TrendingUp, Globe2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import ctaTablets from "@/assets/cta-tablets-wave.png";
-import bagecoatLogoTablets from "@/assets/bagecoat-logo-tablets.png";
+import ctaTablets from "@/assets/cta-tablets-wave.webp";
+import bagecoatLogoTablets from "@/assets/bagecoat-logo-tablets.webp";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
 
 

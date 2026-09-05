@@ -129,7 +129,7 @@ export const Navbar = () => {
     >
       <div className="container-x flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Enrobage India" className="h-[57px] sm:h-[68px] md:h-[78px] lg:h-[94px] w-auto" />
+          <img src={logo} alt="Enrobage India" className="h-[64px] sm:h-[76px] md:h-[88px] lg:h-[104px] w-auto" />
         </Link>
 
         <div className="hidden md:flex items-center gap-6 lg:gap-8">

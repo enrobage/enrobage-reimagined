@@ -22,6 +22,8 @@ const QUALITY = 0.6;
 const SplineTablet = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const appRef = useRef<Application | null>(null);
+  const visibleRef = useRef(true);
   const [scale, setScale] = useState(0.5);
 
   useLayoutEffect(() => {
@@ -40,13 +42,36 @@ const SplineTablet = () => {
     const ro = new ResizeObserver(update);
     ro.observe(el);
     window.addEventListener("resize", update);
+
+    // Pause the WebGL render loop while the hero is off-screen. Otherwise
+    // Spline keeps rendering ~60fps forever and, on a real network where
+    // assets/images are still streaming in, that constant GPU/main-thread
+    // cost starves scrolling and the pill stutters. play()/stop() are no-ops
+    // until the scene has loaded and appRef is set.
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visibleRef.current = entry.isIntersecting;
+        const app = appRef.current;
+        if (!app) return;
+        entry.isIntersecting ? app.play() : app.stop();
+      },
+      { rootMargin: "200px" }
+    );
+    io.observe(el);
+
     return () => {
       ro.disconnect();
+      io.disconnect();
       window.removeEventListener("resize", update);
     };
   }, []);
 
   const handleLoad = (app: Application) => {
+    appRef.current = app;
+    // Scene may finish loading while the hero is already scrolled off-screen
+    // (slow networks) — the observer fired before appRef was set, so apply
+    // the current visibility now.
+    if (!visibleRef.current) app.stop();
     // Shrink the drawing buffer (square -> same framing) to cut per-frame cost.
     // setSize also turns off Spline's own auto-resize, so it won't fight us.
     app.setSize(VIRTUAL * QUALITY, VIRTUAL * QUALITY);

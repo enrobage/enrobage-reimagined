@@ -26,7 +26,7 @@ const PETAL_GRADIENT = `linear-gradient(135deg, ${PETAL.cyan} 0%, ${PETAL.blue} 
 const commitmentPoints = [
   {
     number: "01",
-    title: "Coating systems & manufacturing",
+    title: "Coating Systems & Manufacturing",
     items: [
       { label: "Complete Bagecoat™ Range", desc: "Aqueous, organic and hydroalcoholic film coating systems for immediate and functional release." },
       { label: "WHO-GMP Manufacturing", desc: "Consistent, quality-controlled production of every batch at our own facility." },
@@ -37,7 +37,7 @@ const commitmentPoints = [
   },
   {
     number: "02",
-    title: "Shade development & matching",
+    title: "Shade Development & Matching",
     items: [
       { label: "Custom Shade Development", desc: "Tailor-made shades developed to your reference or brand identity." },
       { label: "Shade Selection Box", desc: "Physical shade guides and colour cards to select the right finish quickly." },
@@ -48,7 +48,7 @@ const commitmentPoints = [
   },
   {
     number: "03",
-    title: "Technical & process support",
+    title: "Technical Process & Support",
     items: [
       { label: "Formulation Guidance", desc: "Selection of the right coating system for your dosage form and process." },
       { label: "Coating Trials", desc: "Support on trial batches, parameter setting and coating optimisation." },
@@ -59,7 +59,7 @@ const commitmentPoints = [
   },
   {
     number: "04",
-    title: "Regulatory & documentation support",
+    title: "Regulatory & Documentation",
     items: [
       { label: "Regulatory Documentation", desc: "Specifications, CoA, MSDS and composition details for your filings." },
       { label: "Certifications", desc: "Supporting certificates and declarations as required for registration." },
@@ -80,20 +80,26 @@ const SectionHeader = ({
   title: string;
   desc?: string;
   titleClassName?: string;
-}) => (
+}) => {
+  const { ref, isVisible } = useScrollReveal();
+  return (
   <div className="text-center max-w-3xl mx-auto mb-14">
-    <AnimatedHeading direction="left">
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+    >
       <h2 className={`heading-section tracking-tight text-logo-navy mb-5 leading-tight ${titleClassName || ""}`}>
         {title}
       </h2>
-    </AnimatedHeading>
+    </div>
     {desc && (
       <p className="text-base md:text-lg text-foreground/75 leading-relaxed">
         {desc}
       </p>
     )}
   </div>
-);
+  );
+};
 
 const Index = () => {
   const { ref: commitRef, isVisible: commitVisible } = useScrollReveal();
@@ -121,8 +127,7 @@ const Index = () => {
                   {[0, 1, 2, 3, 4, 5].map((i) => (
                     <span
                       key={i}
-                      className="w-1.5 h-1.5 rounded-full animate-dot-cycle"
-                      style={{ animationDelay: `${i * 0.25}s` }}
+                      className="w-1.5 h-1.5 rounded-full bg-logo-blue"
                     />
                   ))}
                 </div>
@@ -266,11 +271,13 @@ const Index = () => {
           <SectionHeader
             title="A Commitment to Your Success"
             desc="Your success drives us. From formulation to dispatch, we deliver pharmaceutical excellence and innovation at every step."
-            titleClassName="whitespace-nowrap"
           />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 items-stretch">
-            {commitmentPoints.map((point, i) => (
+            {commitmentPoints.map((point, i) => {
+              const [line1, after] = point.title.split(/\s*&\s*/);
+              const line2 = after ? `& ${after}` : "";
+              return (
               <div
                 key={point.title}
                 className={`group relative overflow-hidden rounded-2xl p-9 md:p-10 text-white flex flex-col h-full transition-all duration-500 hover:-translate-y-2 hover:scale-[1.015] ${commitVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
@@ -280,8 +287,11 @@ const Index = () => {
                   boxShadow: "0 10px 30px hsl(220 40% 13% / 0.14)",
                 }}
               >
-                <h3 className="font-display font-bold tracking-tight text-[1.4rem] md:text-[1.7rem] leading-[1.15] mb-5 text-white min-h-[3.5rem] flex items-start drop-shadow-[0_1px_10px_rgba(0,0,0,0.25)]">
-                  {point.title}
+                <h3 className="font-display font-bold tracking-tight text-[1.25rem] md:text-[1.5rem] leading-[1.15] mb-5 text-white min-h-[3.5rem] flex items-start drop-shadow-[0_1px_10px_rgba(0,0,0,0.25)]">
+                  <span className="block">
+                    <span className="block whitespace-nowrap">{line1}</span>
+                    <span className="block whitespace-nowrap">{line2}</span>
+                  </span>
                 </h3>
                 <span className="block h-px w-10 bg-white/70 mb-5" />
                 <ul className="space-y-3">
@@ -296,7 +306,8 @@ const Index = () => {
                   ))}
                 </ul>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

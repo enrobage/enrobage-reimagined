@@ -123,7 +123,7 @@ const categories = [
   { id: "specialty", label: "Specialty Coatings", color: PETAL.magenta },
 ];
 
-type Product = { name: string; desc: string; logo: string; why?: string[] };
+type Product = { name: string; desc: string; logo: string; why?: string[]; logoClass?: string };
 
 const products: Record<string, Product[]> = {
   normal: [
@@ -179,6 +179,7 @@ const products: Record<string, Product[]> = {
       name: "Bagecoat™ Nutra (Nutraceutical Coating System)",
       desc: "Bagecoat™ Nutra is a specifically developed aqueous film coating system designed for nutraceutical tablets. Free from titanium dioxide (TiO₂) and talcum, this innovative coating is available in transparent, white and coloured formulations, utilising approved natural colours, lake colours or pearlescent pigments for a visually appealing finish. All ingredients in Bagecoat™ Nutra meet the approved excipient standards for nutraceutical products in compliance with EU guidelines, ensuring safety and regulatory adherence.",
       logo: bagecoatNutra,
+      logoClass: "md:scale-[1.4]",
       why: [
         "TiO₂-free and talcum-free formulations for clean-label nutraceutical brands.",
         "Enrobage+ NMS — organic / hydro-alcoholic system (5% / 9%), 4% average weight gain.",
@@ -490,7 +491,7 @@ const Products = () => {
             <>
               <DialogHeader className="space-y-0">
                 <div className="h-40 md:h-56 flex items-center justify-center mb-4">
-                  <img src={openProduct.logo} alt={openProduct.name} className="h-full w-auto max-w-[320px] md:max-w-[560px] object-contain" />
+                  <img src={openProduct.logo} alt={openProduct.name} className={`h-full w-auto max-w-[320px] md:max-w-[560px] object-contain ${openProduct.logoClass ?? ""}`} />
                 </div>
                 <DialogTitle className="sr-only">
                   {openProduct.name}

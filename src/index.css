@@ -334,6 +334,39 @@ img, video, canvas { max-width: 100%; }
   background: hsl(0 0% 100%);
 }
 
+/* Fargo-style footer surface: light theme + diagonal petal beams */
+.footer-beams {
+  background:
+    linear-gradient(115deg, transparent 10%, hsl(var(--logo-blue) / 0.05) 18%, transparent 28%),
+    linear-gradient(115deg, transparent 34%, hsl(var(--logo-purple) / 0.04) 44%, transparent 54%),
+    linear-gradient(115deg, transparent 58%, hsl(var(--logo-cyan) / 0.05) 67%, transparent 77%),
+    hsl(0 0% 100%);
+}
+
+/* Footer giant wordmark — gradient-clipped, cropped by parent overflow-clip.
+   line-height 1.25 keeps glyphs inside the painted box (background-clip:text
+   renders anything outside invisible); the crop happens via negative em margin
+   so it scales with the vw font-size. */
+.footer-wordmark {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: min(15vw, 15rem); /* pure vw under a cap — never outgrows the viewport */
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  text-align: center;
+  margin-bottom: -0.52em; /* clip line ≈ lower third of caps */
+  background: linear-gradient(90deg,
+    hsl(var(--logo-cyan)) 0%,
+    hsl(var(--logo-blue)) 35%,
+    hsl(var(--logo-navy)) 70%,
+    hsl(var(--logo-purple)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
 /* Hexagon outline accent (Colorcon-style decoration) */
 .hex-ring {
   position: absolute;

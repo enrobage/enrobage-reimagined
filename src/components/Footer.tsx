@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
 import { Linkedin, Mail, Phone } from "lucide-react";
-import logo from "@/assets/enrobage-logo-clean.webp";
-
-const CTA_GRADIENT =
-  "linear-gradient(90deg, hsl(195,75%,65%) 0%, hsl(215,75%,50%) 32%, hsl(228,65%,28%) 62%, hsl(278,55%,38%) 85%, hsl(312,60%,45%) 100%)";
 
 const columns = [
   {
@@ -33,32 +29,69 @@ const columns = [
   },
 ];
 
+const socials = [
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/enrobage-india-pvt-ltd",
+    external: true,
+  },
+  { icon: Mail, label: "Email", href: "mailto:info@enrobage.in", external: false },
+  { icon: Phone, label: "Call", href: "tel:+917834033063", external: false },
+];
+
+const SOCIAL_CLASS =
+  "h-11 w-11 rounded-lg border border-border flex items-center justify-center text-logo-blue transition-colors hover:text-logo-navy hover:border-logo-blue/40 hover:bg-logo-blue/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-logo-blue focus-visible:ring-offset-2";
 
 export const Footer = () => {
+  const year = new Date().getFullYear();
   return (
-    <footer className="relative bg-white text-foreground border-t border-border">
-      <div className="rainbow-strip" aria-hidden="true" />
+    <footer className="footer-beams relative overflow-clip border-t border-border text-foreground">
+      <div className="gradient-line-logo h-1" aria-hidden="true" />
 
-      <div className="container-x pt-14 pb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-10">
-          {/* Left — logo + blurb */}
-          <div className="lg:col-span-5">
-            <img src={logo} alt="Enrobage India" className="h-[9.9rem] md:h-[11.55rem] mb-5 ml-[15%]" />
+      <div className="container-x pt-16 md:pt-20 pb-4 md:pb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
+          {/* Left — meta zone */}
+          <div className="lg:col-span-4 flex flex-col items-start gap-5">
+            <p className="text-sm text-foreground/75">
+              © {year} Enrobage India Pvt. Ltd.
+            </p>
+            <div className="flex gap-3">
+              {socials.map(({ icon: Icon, label, href, external }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noreferrer" : undefined}
+                  className={SOCIAL_CLASS}
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
+            <div className="text-[13px] leading-relaxed text-foreground/75 space-y-1.5">
+              <p>
+                Bagecoat™ and all related marks are the property of Enrobage
+                India Pvt. Ltd.
+              </p>
+              <p>Kala Amb, Himachal Pradesh 173030</p>
+            </div>
           </div>
 
-          {/* Right — three link columns */}
-          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-8">
+          {/* Right — link columns, hairline above each header */}
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-10">
             {columns.map((col) => (
-              <div key={col.title}>
-                <h4 className="text-xs uppercase tracking-[0.18em] text-muted-foreground font-semibold mb-4">
+              <div key={col.title} className="border-t border-border pt-5">
+                <h4 className="font-display text-sm font-semibold text-logo-navy mb-4">
                   {col.title}
                 </h4>
-                <ul className="space-y-3">
+                <ul className="space-y-2.5">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       <Link
                         to={link.href}
-                        className="text-sm text-foreground hover:text-logo-blue transition-colors"
+                        className="text-sm font-medium text-foreground hover:text-logo-blue transition-colors focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-logo-blue"
                       >
                         {link.label}
                       </Link>
@@ -69,39 +102,14 @@ export const Footer = () => {
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Rounded copyright bar */}
-        <div className="mt-12 rounded-full bg-muted/60 px-6 md:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs md:text-sm text-muted-foreground text-center sm:text-left">
-            Copyright © {new Date().getFullYear()} Enrobage India Pvt. Ltd. Bagecoat™
-            and all related marks are the property of Enrobage India Pvt. Ltd.
-          </p>
-          <div className="flex items-center gap-3">
-            <a
-              href="https://www.linkedin.com/company/enrobage-india-pvt-ltd"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="LinkedIn"
-              className="h-9 w-9 rounded-full bg-background border border-border flex items-center justify-center text-logo-blue hover:text-logo-navy transition-colors"
-            >
-              <Linkedin size={16} />
-            </a>
-            <a
-              href="mailto:info@enrobage.com"
-              aria-label="Email"
-              className="h-9 w-9 rounded-full bg-background border border-border flex items-center justify-center text-logo-blue hover:text-logo-navy transition-colors"
-            >
-              <Mail size={16} />
-            </a>
-            <a
-              href="tel:+917834033063"
-              aria-label="Call"
-              className="h-9 w-9 rounded-full bg-background border border-border flex items-center justify-center text-logo-blue hover:text-logo-navy transition-colors"
-            >
-              <Phone size={16} />
-            </a>
-          </div>
-        </div>
+      {/* Giant cropped wordmark */}
+      <div
+        aria-hidden="true"
+        className="overflow-clip select-none pointer-events-none px-2"
+      >
+        <div className="footer-wordmark">ENROBAGE</div>
       </div>
     </footer>
   );

@@ -316,7 +316,7 @@ const About = () => {
             <img
               src={aboutTabletsHand}
               alt="Hand holding colorful coated tablets — Bagecoat palette"
-              className="absolute inset-0 w-full h-full object-cover object-center scale-[1.35] lg:scale-[1.5] origin-center"
+              className="absolute inset-0 w-full h-full object-cover object-center lg:object-[35%_center] scale-100 lg:scale-[1.25] origin-center"
             />
           </div>
           <div className="absolute bottom-0 left-0 right-0 z-20" style={{ height: "0.5pt", backgroundColor: "#9ca3af" }} />

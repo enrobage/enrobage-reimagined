@@ -1,5 +1,10 @@
 import { lazy, Suspense } from "react";
-const SplineTablet = lazy(() => import("@/components/SplineTablet"));
+// Start fetching the Spline chunk as soon as this module evaluates instead of
+// waiting for first render — the hero is above the fold and every ms of the
+// main-JS → chunk → scene waterfall shows up as animation jank.
+const loadSplineTablet = () => import("@/components/SplineTablet");
+const SplineTablet = lazy(loadSplineTablet);
+if (window.location.pathname === "/") loadSplineTablet();
 const ScrollPlayVideo = lazy(() => import("@/components/ScrollPlayVideo"));
 
 import { useScrollReveal, useCountUp } from "@/hooks/use-scroll-reveal";

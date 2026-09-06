@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import HeroPillSequence from "@/components/HeroPillSequence";
+import HeroPill from "@/components/HeroPill";
 const ScrollPlayVideo = lazy(() => import("@/components/ScrollPlayVideo"));
 
 import { useScrollReveal, useCountUp } from "@/hooks/use-scroll-reveal";
@@ -166,7 +166,7 @@ const Index = () => {
                     "radial-gradient(circle at 50% 45%, hsl(var(--logo-blue) / 0.16) 0%, hsl(var(--logo-purple) / 0.08) 40%, transparent 70%)",
                 }}
               />
-              <HeroPillSequence />
+              <HeroPill />
             </div>
           </div>
         </div>

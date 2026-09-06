@@ -6,10 +6,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Site-wide inertial scrolling. The hero's Spline tablet maps its rotate/color
- * animation directly to window.scrollY (no damping), so raw mouse-wheel jumps
- * make it stutter. Lenis lerps the real scroll position each frame, so
- * window.scrollY changes smoothly and the baked Spline animation follows.
+ * Site-wide inertial scrolling. The hero's pill frame-sequence maps directly
+ * to window.scrollY (no damping), so raw mouse-wheel jumps would skip several
+ * frames at once and look steppy. Lenis lerps the real scroll position each
+ * frame, so window.scrollY changes smoothly and the scrubbed animation follows.
  * Driven off gsap.ticker and synced to ScrollTrigger so existing scroll
  * animations stay accurate.
  */

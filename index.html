@@ -28,19 +28,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-  <!-- Hero Spline scene: warm the connection everywhere, preload the 430KB
-       scene file only on the homepage so other routes don't pay for it. -->
-  <link rel="preconnect" href="https://prod.spline.design" crossorigin>
-  <script>
-    if (location.pathname === "/") {
-      var l = document.createElement("link");
-      l.rel = "preload";
-      l.as = "fetch";
-      l.crossOrigin = "anonymous";
-      l.href = "https://prod.spline.design/dks7-sxpOefn8wlH/scene.splinecode";
-      document.head.appendChild(l);
-    }
-  </script>
+  <!-- Hero pill: the first frame paints immediately; the rest of the
+       sequence loads in the background from the same origin. -->
+  <link rel="preload" as="image" href="/pill-frames/v1/pill-00.webp">
 </head>
 
   <body>

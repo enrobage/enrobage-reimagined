@@ -1,10 +1,5 @@
 import { lazy, Suspense } from "react";
-// Start fetching the Spline chunk as soon as this module evaluates instead of
-// waiting for first render — the hero is above the fold and every ms of the
-// main-JS → chunk → scene waterfall shows up as animation jank.
-const loadSplineTablet = () => import("@/components/SplineTablet");
-const SplineTablet = lazy(loadSplineTablet);
-if (window.location.pathname === "/") loadSplineTablet();
+import HeroPillSequence from "@/components/HeroPillSequence";
 const ScrollPlayVideo = lazy(() => import("@/components/ScrollPlayVideo"));
 
 import { useScrollReveal, useCountUp } from "@/hooks/use-scroll-reveal";
@@ -171,9 +166,7 @@ const Index = () => {
                     "radial-gradient(circle at 50% 45%, hsl(var(--logo-blue) / 0.16) 0%, hsl(var(--logo-purple) / 0.08) 40%, transparent 70%)",
                 }}
               />
-              <Suspense fallback={<div className="w-full aspect-square max-h-[360px] flex items-center justify-center"><div className="w-16 h-16 rounded-full border-2 border-primary/20 border-t-primary animate-spin" /></div>}>
-                <SplineTablet />
-              </Suspense>
+              <HeroPillSequence />
             </div>
           </div>
         </div>

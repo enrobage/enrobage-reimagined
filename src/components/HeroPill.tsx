@@ -19,6 +19,16 @@ const SCENE_URL = "https://prod.spline.design/dks7-sxpOefn8wlH/scene.splinecode"
 const HeroPill = () => {
   const [live, setLive] = useState(false);      // mount the Spline component
   const [visible, setVisible] = useState(false); // scene rendered -> crossfade
+  const [handoffDone, setHandoffDone] = useState(false); // frames fully faded out
+
+  // Once the live scene is showing, finish the crossfade and hide the frame
+  // placeholder entirely — the Spline canvas is transparent outside the pill,
+  // so leaving the frames visible shows a second pill behind the live one.
+  useEffect(() => {
+    if (!visible) return;
+    const t = window.setTimeout(() => setHandoffDone(true), 450);
+    return () => window.clearTimeout(t);
+  }, [visible]);
 
   useEffect(() => {
     let timer: number | undefined;
@@ -65,7 +75,16 @@ const HeroPill = () => {
 
   return (
     <div className="relative w-full">
-      <HeroPillSequence />
+      {/* stays mounted for layout height; fades out then hides on handoff */}
+      <div
+        style={{
+          opacity: visible ? 0 : 1,
+          transition: "opacity 0.4s ease",
+          visibility: handoffDone ? "hidden" : undefined,
+        }}
+      >
+        <HeroPillSequence />
+      </div>
       {live && (
         <div
           className="absolute inset-0"

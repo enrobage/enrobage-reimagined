@@ -3,8 +3,6 @@ import { Footer } from "@/components/Footer";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { Mail, Phone, Send, Linkedin, MapPin } from "lucide-react";
 import { useState } from "react";
-import contactHero from "@/assets/contact-hero.webp";
-import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 // ponytail: key is public-by-design (Web3Forms client-side key); move to Vercel env if it ever needs rotating

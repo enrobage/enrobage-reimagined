@@ -5,6 +5,10 @@ import { Mail, Phone, Send, Linkedin, MapPin } from "lucide-react";
 import { useState } from "react";
 import contactHero from "@/assets/contact-hero.webp";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
+
+// ponytail: key is public-by-design (Web3Forms client-side key); move to Vercel env if it ever needs rotating
+const WEB3FORMS_KEY = "1dcea557-d4c9-4893-9538-10f7fe458c8b";
 
 const Contact = () => {
   const [formState, setFormState] = useState({
@@ -15,6 +19,8 @@ const Contact = () => {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [botcheck, setBotcheck] = useState("");
 
   const productOptions = [
     "Bagecoat™ FILM",
@@ -35,17 +41,33 @@ const Contact = () => {
   const mapsEmbed =
     "https://maps.google.com/maps?q=Enrobage+India+Pvt+Ltd,+Kala+Amb,+Himachal+Pradesh+173030&output=embed";
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      const subject =
-        formState.subject || `Inquiry from ${formState.name}`;
-      const body = `Looking for: ${formState.interest}\n\n${formState.message}`;
-      window.location.href = `mailto:info@enrobage.in?subject=${encodeURIComponent(
-        subject
-      )}&body=${encodeURIComponent(body)}`;
-    }, 1500);
+    setSending(true);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: formState.subject || `Inquiry from ${formState.name}`,
+          name: formState.name,
+          email: formState.email,
+          "coating system": formState.interest,
+          message: formState.message,
+          botcheck,
+        }),
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message);
+      setSubmitted(true);
+    } catch {
+      toast.error(
+        "Couldn't send your message. Please try again or email info@enrobage.in directly."
+      );
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -171,6 +193,16 @@ const Contact = () => {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    <input
+                      type="text"
+                      name="botcheck"
+                      value={botcheck}
+                      onChange={(e) => setBotcheck(e.target.value)}
+                      className="hidden"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                    />
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="contact-name" className="block text-sm font-medium text-foreground mb-2">
@@ -264,8 +296,12 @@ const Contact = () => {
                       />
                     </div>
 
-                    <button type="submit" className="btn-ombre group">
-                      Send Message
+                    <button
+                      type="submit"
+                      className="btn-ombre group disabled:opacity-60 disabled:pointer-events-none"
+                      disabled={sending}
+                    >
+                      {sending ? "Sending…" : "Send Message"}
                       <Send
                         size={16}
                         className="group-hover:translate-x-1 transition-transform"
